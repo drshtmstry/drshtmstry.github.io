@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" class="no-transition">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dr. Darshit Mistry</title>
+
+    <script>
+        // Set theme immediately to prevent flash
+        (function () {
+            try {
+                const stored = localStorage.getItem("theme");
+                const prefersLight = window.matchMedia("(prefers-color-scheme:light)").matches;
+                const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+
+                let theme = 'light'; // default
+
+                if (stored) {
+                    theme = stored;
+                } else if (prefersLight) {
+                    theme = 'light';
+                } else if (prefersDark) {
+                    theme = 'dark';
+                }
+
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                // Fallback to default if error
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <button id="theme-toggle" class="theme-toggle mobile-hide" aria-label="Toggle Theme">
+        <i class="fa-solid fa-moon"></i>
+    </button>
+
+    <nav class="glass-nav mobile-show">
+        <div class="nav-content">
+            <div class="mobile-branding"><img src="assets/favicon.ico" alt="Logo">
+                <div class="mobile-brand-text"><span>Dr. Darshit Mistry</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container fade-in">
+        <header class="hero-section">
+            <div class="profile-header">
+                <div class="avatar-wrapper"><img src="assets/profile.webp" class="avatar no-copy" draggable="false"
+                        oncontextmenu="return false;" style="pointer-events: none;" alt="Dr. Darshit Mistry"></div>
+                <div class="hero-content">
+                    <h1>Dr. Darshit Mistry</h1>
+                    <p class="credentials">M.B.B.S., M.D. <span>(Microbiology)</span></p>
+                    <p class="role"> Assistant Professor, Microbiology<br><span class="institution">Banas Medical
+                            College & Research Institute, Palanpur.</span></p>
+                    <div class="social-links"><a href="https://www.linkedin.com/in/drshtmstry" target="_blank"
+                            class="btn btn-glass linkedin"><i class="fab fa-linkedin"></i> LinkedIn </a><a
+                            href="https://github.com/drshtmstry" target="_blank" class="btn btn-glass github"><i
+                                class="fab fa-github"></i> GitHub </a></div>
+                </div>
+            </div>
+        </header>
+        <div class="bento-grid">
+            <article class="card about-card reveal">
+                <div class="card-header"><i class="fa-solid fa-user-doctor icon-accent"></i>
+                    <h3>About Me</h3>
+                </div>
+                <p>As an Assistant Professor, I focus on integrating workflows into Microbiology surveillance and
+                    undergraduate teaching.</p>
+                <p class="sub-text">My mission is to optimize Microbiology work through better reporting and
+                    automation.
+                </p>
+            </article>
+            <article class="card reveal">
+                <div class="card-header"><i class="fa-solid fa-microscope icon-accent"></i>
+                    <h3>Core Focus</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Clinical Microbiology</li>
+                    <li>Antimicrobial Stewardship</li>
+                    <li>WHONET Analysis</li>
+                    <li>Reporting Systems</li>
+                </ul>
+            </article>
+            <article class="card reveal">
+                <div class="card-header"><i class="fa-solid fa-award icon-accent"></i>
+                    <h3>Academic Highlights</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>UG Teaching & Mentorship</li>
+                    <li>AMR Surveillance</li>
+                    <li>Environmental Reporting</li>
+                </ul>
+            </article>
+            <article class="card reveal">
+                <div class="card-header"><i class="fa-solid fa-laptop-code icon-accent"></i>
+                    <h3>Digital Tools</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Reporting Automation</li>
+                    <li>Data Analysis</li>
+                    <li>BMCRI Website&nbsp;&nbsp;<i class="fa-solid fa-spinner fa-spin"></i></li>
+                </ul>
+            </article>
+            <article class="card reveal">
+                <div class="card-header"><i class="fa-solid fa-users icon-accent"></i>
+                    <h3>Member</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Admission Help Center Committee</li>
+                    <li>University Examinations Committee</li>
+                    <li>IT Committee</li>
+                    <li>DR-TB Core Committee</li>
+                </ul>
+            </article>
+            <article class="card quote-card reveal">
+                <blockquote>“Learning something new every day.”</blockquote>
+            </article>
+        </div>
+        <footer>
+            <div class="mobile-footer-extras mobile-show"><button id="footer-theme-btn" class="btn-glass-sm"><i
+                        class="fa-solid fa-moon"></i><span>Switch Theme</span></button></div>
+            <p>&copy; <span id="current-year"></span> Dr. Darshit Mistry</p>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
