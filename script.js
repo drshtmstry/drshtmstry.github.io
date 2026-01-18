@@ -2,50 +2,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const docElement = document.documentElement;
     const storage = localStorage;
 
-    // Helper: Determine current theme
+    // --- 1. THEME LOGIC ---
+
+    // Determine current theme
     const getCurrentTheme = () => {
         return docElement.getAttribute("data-theme") || storage.getItem("theme") || "light";
     };
 
-    // Helper: Set theme to DOM and Storage
+    // Set theme to DOM and Storage
     const setTheme = (themeName) => {
         docElement.setAttribute("data-theme", themeName);
         storage.setItem("theme", themeName);
-        updateTextLabels(themeName);
     };
 
-    // Helper: Update text labels (Mobile only)
-    // Helper: Update text labels (Mobile only)
-    const updateTextLabels = (themeName) => {
-        // Logic removed so text remains "Switch Theme" permanently
-    };
-
-    // 1. Set Initial Theme (This runs instantly)
+    // Set Initial Theme
     const initialTheme = getCurrentTheme();
     docElement.setAttribute("data-theme", initialTheme);
 
-    // 2. Wait for DOM to update labels
-    window.addEventListener("DOMContentLoaded", () => {
-        updateTextLabels(initialTheme);
-
-        // Click Listener
-        document.addEventListener("click", (event) => {
-            const button = event.target.closest("#theme-toggle, #mobile-theme-toggle, #footer-theme-btn");
-            if (button) {
-                event.preventDefault();
-                const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
-                setTheme(newTheme);
-            }
-        });
+    // Theme Toggle Click Listener
+    document.addEventListener("click", (event) => {
+        const button = event.target.closest("#theme-toggle, #mobile-theme-toggle, #footer-theme-btn");
+        if (button) {
+            event.preventDefault();
+            const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+            setTheme(newTheme);
+        }
     });
 
+    // --- 2. UI UTILITIES ---
+
+    // Footer Year Update
     const yearSpan = document.getElementById("current-year");
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
+    // Background Blob Parallax (Desktop Only)
     const blob1 = document.querySelector(".glow-1");
     const blob2 = document.querySelector(".glow-2");
-    let ticking = false;
-    if (window.innerWidth > 1024) {
+
+    // Added safety check (&& blob1 && blob2) to prevent errors on pages without blobs
+    if (window.innerWidth > 1024 && blob1 && blob2) {
+        let ticking = false;
         window.addEventListener("scroll", () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
@@ -58,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Scroll Reveal Animation
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -70,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
 
+    // Enable Transitions After Page Load
     window.addEventListener('load', () => {
         document.body.classList.remove('no-transition');
         document.documentElement.classList.remove('no-transition');
