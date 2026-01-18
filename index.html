@@ -46,8 +46,9 @@
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
 
-    <button id="theme-toggle" class="theme-toggle mobile-hide" aria-label="Toggle Theme">
-        <i class="fa-solid fa-moon"></i>
+    <button id="theme-toggle" class="theme-toggle mobile-hide" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
+        <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
     </button>
 
     <nav class="glass-nav mobile-show">
@@ -58,12 +59,16 @@
         </div>
     </nav>
 
-    <main class="container fade-in">
+    <main class="container">
         <header class="hero-section">
             <div class="profile-header">
-                <div class="avatar-wrapper"><img src="assets/profile.webp" class="avatar no-copy" draggable="false"
-                        oncontextmenu="return false;" style="pointer-events: none;" alt="Dr. Darshit Mistry"></div>
-                <div class="hero-content">
+
+                <div class="avatar-wrapper reveal">
+                    <img src="assets/profile.webp" class="avatar no-copy" draggable="false"
+                        oncontextmenu="return false;" style="pointer-events: none;" alt="Dr. Darshit Mistry">
+                </div>
+
+                <div class="hero-content reveal">
                     <h1>Dr. Darshit Mistry</h1>
                     <p class="credentials">M.B.B.S., M.D. <span>(Microbiology)</span></p>
                     <p class="role"> Assistant Professor, Microbiology<br><span class="institution">Banas Medical
@@ -126,9 +131,16 @@
                 <blockquote>“ Learning something new every day. ”</blockquote>
             </article>
         </div>
-        <footer>
-            <div class="mobile-footer-extras mobile-show"><button id="footer-theme-btn" class="btn-glass-sm"><i
-                        class="fa-solid fa-moon"></i><span>Switch Theme</span></button></div>
+        <footer class="reveal">
+            <div class="mobile-footer-extras mobile-show">
+                <button id="footer-theme-btn" class="btn-glass-sm">
+                    <div class="footer-theme-wrapper">
+                        <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
+                        <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
+                    </div>
+                    <span>Switch Theme</span>
+                </button>
+            </div>
             <p>&copy; <span id="current-year"></span> Dr. Darshit Mistry</p>
         </footer>
     </main>

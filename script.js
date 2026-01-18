@@ -1,60 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const store = localStorage;
-    const toggles = document.querySelectorAll("#theme-toggle, #footer-theme-btn");
+    const docElement = document.documentElement;
+    const storage = localStorage;
 
-    // Remove no-transition class that was added in HTML to prevent initial flash
-    // We use requestAnimationFrame to ensure the paint has settled
-    requestAnimationFrame(() => {
-        document.documentElement.classList.remove('no-transition');
-    });
-
-    // Function to get current state
-    const getTheme = () => document.documentElement.getAttribute("data-theme") || "light";
-
-    // Function to update UI (Icons & Text)
-    const updateUI = () => {
-        const theme = getTheme();
-        const isDark = theme === "dark";
-
-        const iconClass = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
-        const btnText = isDark ? "Light Mode" : "Dark Mode";
-
-        toggles.forEach(btn => {
-            const i = btn.querySelector("i");
-            if (i) i.className = iconClass;
-
-            btn.setAttribute("data-theme-text", btnText);
-
-            const span = btn.querySelector("span");
-            if (span) span.textContent = btnText;
-        });
+    // Helper: Determine current theme
+    const getCurrentTheme = () => {
+        return docElement.getAttribute("data-theme") || storage.getItem("theme") || "light";
     };
 
-    // Initial UI Update (theme already set in HTML)
-    updateUI();
+    // Helper: Set theme to DOM and Storage
+    const setTheme = (themeName) => {
+        docElement.setAttribute("data-theme", themeName);
+        storage.setItem("theme", themeName);
+        updateTextLabels(themeName);
+    };
 
-    // Click Handlers
-    toggles.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            e.preventDefault();
+    // Helper: Update text labels (Mobile only)
+    // Helper: Update text labels (Mobile only)
+    const updateTextLabels = (themeName) => {
+        // Logic removed so text remains "Switch Theme" permanently
+    };
 
-            // Add no-transition class to prevent flash during toggle
-            document.documentElement.classList.add('no-transition');
+    // 1. Set Initial Theme (This runs instantly)
+    const initialTheme = getCurrentTheme();
+    docElement.setAttribute("data-theme", initialTheme);
 
-            const current = getTheme();
-            const next = current === "light" ? "dark" : "light";
+    // 2. Wait for DOM to update labels
+    window.addEventListener("DOMContentLoaded", () => {
+        updateTextLabels(initialTheme);
 
-            document.documentElement.setAttribute("data-theme", next);
-            store.setItem("theme", next);
-            updateUI();
-
-            // Force reflow
-            void document.documentElement.offsetWidth;
-
-            // Remove class after a frame
-            requestAnimationFrame(() => {
-                document.documentElement.classList.remove('no-transition');
-            });
+        // Click Listener
+        document.addEventListener("click", (event) => {
+            const button = event.target.closest("#theme-toggle, #mobile-theme-toggle, #footer-theme-btn");
+            if (button) {
+                event.preventDefault();
+                const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+            }
         });
     });
 
@@ -88,4 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
         threshold: 0.15
     });
     document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
+
+    window.addEventListener('load', () => {
+        document.body.classList.remove('no-transition');
+        document.documentElement.classList.remove('no-transition');
+    });
 });
