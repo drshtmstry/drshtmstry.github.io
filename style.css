@@ -13,7 +13,7 @@
   --tag-border: rgba(255, 255, 255, 0.1);
   --gradient-title-start: #fff;
   --gradient-title-end: #94a3b8;
-  --glow-opacity: 0.55;
+  --glow-opacity: 0.75;
   --card-blur: 24px;
   --font-heading: "Google Sans", sans-serif;
   --font-body: "Montserrat", sans-serif;
@@ -30,7 +30,7 @@
   --text-secondary: #475569;
   --gradient-title-start: #0f172a;
   --gradient-title-end: #334155;
-  --glow-opacity: 0.5;
+  --glow-opacity: 0.75;
   --card-blur: 20px;
   --tag-bg: rgba(255, 255, 255, 0.6);
   --tag-border: rgba(255, 255, 255, 0.9);
@@ -168,7 +168,7 @@ button {
 
 .hero-section {
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .profile-header {
@@ -406,7 +406,7 @@ button {
   height: 40px;
   padding: 0 16px;
   border-radius: 50px;
-  background: transparent !important;
+  background: transparent;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
@@ -529,7 +529,7 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 32px;
+  padding: 24px;
   font-style: italic;
 }
 
@@ -581,7 +581,6 @@ button {
 
 footer {
   text-align: center;
-  margin-top: 60px;
   padding-top: 20px;
   border-top: 1px solid var(--border-color);
   position: relative;
@@ -604,7 +603,7 @@ footer p {
   }
 
   .container {
-    padding: 20px;
+    padding: 25px 20px;
   }
 
   .hero-section {
@@ -704,7 +703,7 @@ footer p {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
   }
 
   #footer-theme-btn.btn-glass-sm {
