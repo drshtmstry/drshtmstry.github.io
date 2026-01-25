@@ -250,13 +250,13 @@ button {
 }
 
 .btn {
-  padding: 10px 15px;
+  padding: 8px 15px;
   border-radius: 10px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 500;
+  font-weight: 800;
   font-size: 1rem;
 }
 
@@ -276,7 +276,6 @@ button {
 }
 
 .btn-glass:hover {
-  transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -604,6 +603,19 @@ footer p {
     --header-height: 60px;
   }
 
+  .container {
+    padding: 20px;
+  }
+
+  .hero-section {
+    margin-bottom: 30px;
+  }
+
+  .profile-header {
+    margin-top: 0 !important;
+    gap: 10px;
+  }
+
   .mobile-hide {
     display: none !important;
   }
@@ -682,6 +694,10 @@ footer p {
     letter-spacing: 1px;
     font-family: var(--font-body);
     margin-top: 2px;
+  }
+
+  footer {
+    margin-top: 0;
   }
 
   .mobile-footer-extras {
