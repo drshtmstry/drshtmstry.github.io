@@ -65,12 +65,10 @@ html[data-theme] {
 
 [data-theme="light"] .glow-1 {
   background: #3b82f6;
-  filter: blur(140px);
 }
 
 [data-theme="light"] .glow-2 {
   background: #06b6d4;
-  filter: blur(140px);
 }
 
 [data-theme="light"] .credentials {
@@ -87,7 +85,6 @@ html[data-theme] {
 
 html {
   width: 100%;
-  overflow-x: hidden;
   background-color: var(--bg-body);
 }
 
@@ -114,9 +111,13 @@ body {
   opacity: var(--glow-opacity);
   transition:
     opacity 0.5s ease,
-    background 0.5s ease;
+    background-color 0.5s ease;
   z-index: 0;
   pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: background-color, opacity;
 }
 
 button::-moz-focus-inner {
@@ -434,14 +435,19 @@ button {
 }
 
 .footer-theme-wrapper .theme-icon {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: auto;
-  height: auto;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  margin-top: -12px;
+  margin-left: -12px;
+  width: 24px;
+  height: 24px;
   line-height: 24px;
+  text-align: center;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 /* --- ACTIVE STATE (Touch Feedback) --- */
@@ -642,7 +648,7 @@ footer p {
     width: 100%;
     height: var(--header-height);
     padding: 0 15px;
-    background: rgba(var(--bg-card-rgb), 0.25);
+    background: rgba(var(--bg-card-rgb), 0.05);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
