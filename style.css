@@ -593,7 +593,6 @@ button {
 
 .tag-list li:hover {
   color: var(--text-main);
-  transform: translateY(-1px);
   background: rgba(59, 130, 246, 0.1);
   cursor: pointer;
 }
