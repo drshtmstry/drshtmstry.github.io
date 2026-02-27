@@ -484,9 +484,9 @@ button {
   
   /* UPDATED: Faster, snappier transition */
   transition:
-    transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.1s ease-out,
+    border-color 0.1s ease-out,
+    box-shadow 0.1s ease-out;
     
   /* Keeps the glassmorphism glitch fix */
   transform: translate3d(0, 0, 0);
