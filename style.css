@@ -143,17 +143,17 @@ button {
 .reveal,
 .card.reveal {
   opacity: 0;
-  translate: 0 30px;
+  transform: translateY(30px) translateZ(0);
 
   transition:
-    opacity 0.8s ease-out,
-    translate 0.8s ease-out;
+    opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .reveal.active,
 .card.reveal.active {
   opacity: 1;
-  translate: 0 0;
+  transform: translateY(0) translateZ(0);
 }
 
 .container {
@@ -482,25 +482,21 @@ button {
   display: flex;
   flex-direction: column;
   
-  /* Fast 0.2s timer for when your mouse LEAVES the card */
+  /* Smooth, natural timer for when your mouse LEAVES */
   transition: 
-    scale 0.2s ease-out, 
-    border-color 0.2s ease-out, 
-    box-shadow 0.2s ease-out;
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
     
-  /* Keeps the glassmorphism fix active */
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-
-  /* Anti-aliasing fixes the blurry text */
+  /* Hardware acceleration + Crisp Text */
+  transform: translateZ(0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* DARK THEME HOVER */
 .card.active:hover {
-  scale: 1.02;
+  transform: scale(1.02) translateZ(0);
   border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
     0 12px 30px -5px rgba(59, 130, 246, 0.2),
@@ -508,8 +504,12 @@ button {
     
   cursor: pointer;
   z-index: 10;
-
-  transition-duration: 0.1s; 
+  
+  /* The magic spring curve for when your mouse ENTERS */
+  transition: 
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), 
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 /* LIGHT THEME HOVER */
