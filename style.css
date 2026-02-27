@@ -148,7 +148,6 @@ button {
   transition:
     opacity 0.8s ease-out,
     transform 0.8s ease-out;
-  will-change: opacity, transform;
 }
 
 .reveal.active,
@@ -486,7 +485,9 @@ button {
     transform 0.3s ease,
     border-color 0.3s ease,
     box-shadow 0.3s ease;
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .card:hover {
