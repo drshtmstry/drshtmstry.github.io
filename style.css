@@ -491,8 +491,20 @@ button {
 }
 
 .card:hover {
-  box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+  transform: translateY(-6px) translate3d(0, 0, 0); /* The lift effect */
+  border-color: rgba(255, 255, 255, 0.3); /* Brighter edge */
+  box-shadow: 
+    0 12px 30px -10px rgba(0, 0, 0, 0.3), /* Deep, soft drop shadow */
+    0 4px 10px -5px rgba(0, 0, 0, 0.1); /* Tighter contact shadow */
   cursor: pointer;
+}
+
+/* Make sure it adapts beautifully to your light theme */
+[data-theme="light"] .card:hover {
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow: 
+    0 15px 35px -10px rgba(31, 38, 135, 0.15),
+    0 5px 15px -5px rgba(31, 38, 135, 0.05);
 }
 
 .card-header {
