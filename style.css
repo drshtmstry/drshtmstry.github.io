@@ -143,17 +143,17 @@ button {
 .reveal,
 .card.reveal {
   opacity: 0;
-  transform: translateY(30px);
+  translate: 0 30px;
 
   transition:
     opacity 0.8s ease-out,
-    transform 0.8s ease-out;
+    translate 0.8s ease-out;
 }
 
 .reveal.active,
 .card.reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  translate: 0 0;
 }
 
 .container {
@@ -482,22 +482,26 @@ button {
   display: flex;
   flex-direction: column;
   
-  /* UPDATED: Faster, snappier transition */
-  transition:
-    transform 0.1s ease-out,
-    border-color 0.1s ease-out,
-    box-shadow 0.1s ease-out;
+  /* Fast 0.2s timer for when your mouse LEAVES the card */
+  transition: 
+    scale 0.2s ease-out, 
+    border-color 0.2s ease-out, 
+    box-shadow 0.2s ease-out;
     
-  /* Keeps the glassmorphism glitch fix */
+  /* Keeps the glassmorphism fix active */
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
+  /* Anti-aliasing fixes the blurry text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* DARK THEME HOVER */
 .card.active:hover {
-  transform: scale(1.01) translate3d(0, 0, 0);
+  scale: 1.02;
   border-color: rgba(59, 130, 246, 0.5);
-  
   box-shadow: 
     0 12px 30px -5px rgba(59, 130, 246, 0.2),
     0 0 15px rgba(59, 130, 246, 0.15);
@@ -505,9 +509,10 @@ button {
   cursor: pointer;
   z-index: 10;
 
-  transition: all 0.1s ease-out; 
+  transition-duration: 0.1s; 
 }
 
+/* LIGHT THEME HOVER */
 [data-theme="light"] .card.active:hover {
   border-color: rgba(255, 255, 255, 1);
   box-shadow: 
