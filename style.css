@@ -481,27 +481,32 @@ button {
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
+  
+  /* UPDATED: Faster, snappier transition */
   transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+    
+  /* Keeps the glassmorphism glitch fix */
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-/* Update the main hover state */
+/* Dark Theme Hover (Scale) */
 .card:hover,
 .card.active:hover {
-  transform: translateY(-6px) translate3d(0, 0, 0); /* The lift effect */
-  border-color: rgba(255, 255, 255, 0.3); /* Brighter edge */
+  transform: scale(1.05) translate3d(0, 0, 0);
+  border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 
-    0 12px 30px -10px rgba(0, 0, 0, 0.3), /* Deep, soft drop shadow */
-    0 4px 10px -5px rgba(0, 0, 0, 0.1); /* Tighter contact shadow */
+    0 12px 30px -10px rgba(0, 0, 0, 0.3),
+    0 4px 10px -5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  z-index: 10; /* Ensures the scaled card pops over adjacent cards */
 }
 
-/* Update the light theme hover state */
+/* Light Theme Hover (Scale) */
 [data-theme="light"] .card:hover,
 [data-theme="light"] .card.active:hover {
   border-color: rgba(255, 255, 255, 1);
