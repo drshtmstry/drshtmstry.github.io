@@ -143,7 +143,8 @@ button {
 .reveal,
 .card.reveal {
   opacity: 0;
-  transform: translateY(30px) translateZ(0);
+  /* ADDED scale(1) to the chain */
+  transform: translateY(30px) scale(1) translateZ(0);
 
   transition:
     opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -153,7 +154,8 @@ button {
 .reveal.active,
 .card.reveal.active {
   opacity: 1;
-  transform: translateY(0) translateZ(0);
+  /* ADDED scale(1) to the chain */
+  transform: translateY(0) scale(1) translateZ(0);
 }
 
 .container {
@@ -511,15 +513,18 @@ button {
     border-color 0.25s ease,
     box-shadow 0.25s ease;
     
-  /* Hardware acceleration + Crisp Text */
-  transform: translateZ(0);
+  /* The ultimate anti-blur locks */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* DARK THEME HOVER */
 .card.active:hover {
-  transform: scale(1.02) translateZ(0);
+  /* ADDED translateY(0) to perfectly match the active state string */
+  transform: translateY(0) scale(1.02) translateZ(0);
+  
   border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
     0 12px 30px -5px rgba(59, 130, 246, 0.2),
@@ -528,7 +533,6 @@ button {
   cursor: pointer;
   z-index: 10;
   
-  /* The magic spring curve for when your mouse ENTERS */
   transition: 
     transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), 
     border-color 0.15s ease,
