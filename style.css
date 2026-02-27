@@ -518,7 +518,7 @@ button {
 }
 
 .card.active:hover::before {
-  transform: scale(1.01); /* Apply scale ONLY to the background */
+  transform: scale(1.02); /* Apply scale ONLY to the background */
   border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
     0 12px 30px -5px rgba(59, 130, 246, 0.2),
