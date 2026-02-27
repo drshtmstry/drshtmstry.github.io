@@ -491,7 +491,7 @@ button {
 
 /* DARK THEME HOVER */
 .card.active:hover {
-  transform: translateY(0) scale(1.02); /* Pure 2D */
+  transform: translateY(0) scale(1.01);
   border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
     0 12px 30px -5px rgba(59, 130, 246, 0.2),
