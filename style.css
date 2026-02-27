@@ -490,7 +490,9 @@ button {
   backface-visibility: hidden;
 }
 
-.card:hover {
+/* Update the main hover state */
+.card:hover,
+.card.active:hover {
   transform: translateY(-6px) translate3d(0, 0, 0); /* The lift effect */
   border-color: rgba(255, 255, 255, 0.3); /* Brighter edge */
   box-shadow: 
@@ -499,8 +501,9 @@ button {
   cursor: pointer;
 }
 
-/* Make sure it adapts beautifully to your light theme */
-[data-theme="light"] .card:hover {
+/* Update the light theme hover state */
+[data-theme="light"] .card:hover,
+[data-theme="light"] .card.active:hover {
   border-color: rgba(255, 255, 255, 1);
   box-shadow: 
     0 15px 35px -10px rgba(31, 38, 135, 0.15),
