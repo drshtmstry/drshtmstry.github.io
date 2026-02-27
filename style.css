@@ -494,20 +494,20 @@ button {
   backface-visibility: hidden;
 }
 
-/* Dark Theme Hover (Scale) */
-.card:hover,
 .card.active:hover {
-  transform: scale(1.02) translate3d(0, 0, 0);
-  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.01) translate3d(0, 0, 0);
+  border-color: rgba(59, 130, 246, 0.5);
+  
   box-shadow: 
-    0 12px 30px -10px rgba(0, 0, 0, 0.3),
-    0 4px 10px -5px rgba(0, 0, 0, 0.1);
+    0 12px 30px -5px rgba(59, 130, 246, 0.2),
+    0 0 15px rgba(59, 130, 246, 0.15);
+    
   cursor: pointer;
-  z-index: 10; /* Ensures the scaled card pops over adjacent cards */
+  z-index: 10;
+
+  transition: all 0.1s ease-out; 
 }
 
-/* Light Theme Hover (Scale) */
-[data-theme="light"] .card:hover,
 [data-theme="light"] .card.active:hover {
   border-color: rgba(255, 255, 255, 1);
   box-shadow: 
