@@ -521,7 +521,7 @@ button {
 
 /* DARK THEME HOVER */
 .card.active:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   cursor: pointer;
   z-index: 10;
 }
