@@ -701,6 +701,7 @@ footer p {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
     display: flex;
     align-items: center;
     justify-content: space-between;
