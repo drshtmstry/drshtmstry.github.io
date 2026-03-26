@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="no-transition">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dr. Darshit Mistry</title>
+
+    <script>
+        // Set theme immediately to prevent flash
+        (function () {
+            try {
+                const stored = localStorage.getItem("theme");
+                const prefersLight = window.matchMedia("(prefers-color-scheme:light)").matches;
+                const prefersDark = window.matchMedia("(prefers-color-scheme:dark)").matches;
+
+                let theme = 'light'; // default
+
+                if (stored) {
+                    theme = stored;
+                } else if (prefersLight) {
+                    theme = 'light';
+                } else if (prefersDark) {
+                    theme = 'dark';
+                }
+
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                // Fallback to default if error
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <button id="theme-toggle" class="theme-toggle mobile-hide" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
+        <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
+    </button>
+
+    <nav class="glass-nav mobile-show">
+        <div class="nav-content">
+            <div class="mobile-branding"><img src="assets/favicon.ico" alt="Logo">
+                <div class="mobile-brand-text"><span>Dr. Darshit Mistry</span></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero-section">
+            <div class="profile-header">
+
+                <div class="avatar-wrapper reveal">
+                    <img src="assets/profile.webp" class="avatar no-copy" draggable="false"
+                        oncontextmenu="return false;" style="pointer-events: none;" alt="Dr. Darshit Mistry">
+                </div>
+
+                <div class="hero-content reveal">
+                    <h1>Dr. Darshit Mistry</h1>
+                    <p class="credentials">M.B.B.S., M.D. <span>(Microbiology)</span></p>
+                    <p class="role"> Assistant Professor, Microbiology<br><span class="institution">Banas Medical
+                            College & Research Institute, Palanpur.</span></p>
+                    <div class="social-links"><a href="https://www.linkedin.com/in/drshtmstry" target="_blank"
+                            class="btn btn-glass linkedin"><i class="fab fa-linkedin"></i> LinkedIn </a><a
+                            href="https://github.com/drshtmstry" target="_blank" class="btn btn-glass github"><i
+                                class="fab fa-github"></i> GitHub </a></div>
+                </div>
+            </div>
+        </header>
+        <div class="bento-grid">
+            <article class="card about-card reveal">
+                <div class="card-header"><i class="fa-solid fa-user-doctor icon-accent"></i>
+                    <h3>About Me</h3>
+                </div>
+                <p>Alongside my academic responsibilities, I manage the college website, design
+                    MS Access–based reporting tools, and actively pursue coding to expand my programming skills.</p>
+            </article>
+            <article class="card reveal">
+                <div class="card-header">
+                    <i class="fa-solid fa-microscope icon-accent"></i>
+                    <h3>Core Expertise</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Clinical Microbiology</li>
+                </ul>
+            </article>
+
+            <article class="card reveal">
+                <div class="card-header">
+                    <i class="fa-solid fa-award icon-accent"></i>
+                    <h3>Academic Engagement</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Undergraduate Teaching & Mentorship</li>
+                </ul>
+            </article>
+
+            <article class="card reveal">
+                <div class="card-header">
+                    <i class="fa-solid fa-laptop-code icon-accent"></i>
+                    <h3>Digital Initiatives</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>WHONET Implementation for Culture and Sensitivity Reporting</li>
+                    <li>MS Access based Tools for Surveillance Sample Reporting</li>
+                    <li>MS Access based Viral Load Reporting Systems</li>
+                    <li>Institutional Website Management</li>
+                </ul>
+            </article>
+
+            <article class="card reveal">
+                <div class="card-header">
+                    <i class="fa-solid fa-users icon-accent"></i>
+                    <h3>Member of Institutional Committees</h3>
+                </div>
+                <ul class="tag-list">
+                    <li>Admission Help Center Committee</li>
+                    <li>University Examinations Committee</li>
+                    <li>DR-TB Core Committee</li>
+                    <li>IT Committee</li>
+                </ul>
+            </article>
+            <article class="card quote-card reveal">
+                <blockquote>“ Programmers spend half their time fixing bugs, and the other half creating them. ”
+                </blockquote>
+            </article>
+        </div>
+        <footer class="reveal">
+            <div class="mobile-footer-extras mobile-show">
+                <button id="footer-theme-btn" class="btn-glass-sm">
+                    <div class="footer-theme-wrapper">
+                        <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
+                        <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
+                    </div>
+                    <span>Switch Theme</span>
+                </button>
+            </div>
+            <p>&copy; <span id="current-year"></span> Dr. Darshit Mistry</p>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
