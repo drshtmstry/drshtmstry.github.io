@@ -264,6 +264,8 @@ button {
   gap: 8px;
   font-weight: 600;
   font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .btn-glass i {
@@ -274,8 +276,6 @@ button {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -289,8 +289,8 @@ button {
 }
 
 .btn-glass:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transform: scale(1.02);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02) translateZ(0);
 }
 
 .btn-glass.linkedin {
@@ -378,13 +378,10 @@ button {
 
 .theme-icon {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  width: 1.1rem;
-  height: 1.1rem;
-  margin-top: -0.55rem;
-  margin-left: -0.55rem;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  height: max-content;
 
   font-size: 1.1rem;
   line-height: 1;
@@ -463,15 +460,11 @@ button {
 }
 
 .footer-theme-wrapper .theme-icon {
-  margin: 0;
-  top: 50%;
-  left: 50%;
-  margin-top: -12px;
-  margin-left: -12px;
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  height: max-content;
+  line-height: 1;
   transform-origin: center center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
