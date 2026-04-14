@@ -583,8 +583,13 @@ button {
 }
 
 .about-card,
-.quote-card {
+.quote-card,
+.project-card {
   grid-column: span 2;
+}
+
+.project-card {
+  text-decoration: none;
 }
 
 .quote-card {
@@ -820,7 +825,8 @@ footer p {
   }
 
   .about-card,
-  .quote-card {
+  .quote-card,
+  .project-card {
     grid-column: span 1;
   }
 
