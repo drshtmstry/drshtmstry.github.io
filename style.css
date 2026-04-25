@@ -235,7 +235,6 @@ button::-moz-focus-inner {
   background: rgba(59, 130, 246, 0.15);
   border: 1px solid var(--border-color);
   border-radius: 999px;
-  backdrop-filter: blur(5px);
 }
 
 .credentials span {
