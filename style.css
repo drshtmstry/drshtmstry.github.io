@@ -53,23 +53,23 @@ html[data-theme] {
 }
 
 .glow-1 {
-  top: -120px;
-  left: -120px;
-  background: #3b82f6;
+  top: -400px;
+  left: -300px;
+  color: #3b82f6;
 }
 
 .glow-2 {
-  bottom: -50px;
-  right: -120px;
-  background: #06b6d4;
+  bottom: -400px;
+  right: -300px;
+  color: #06b6d4;
 }
 
 [data-theme="dark"] .glow-1 {
-  background: #2563eb;
+  color: #2563eb;
 }
 
 [data-theme="dark"] .glow-2 {
-  background: #0891b2;
+  color: #0891b2;
 }
 
 /* REMOVED: .credentials top-of-file block was a partial duplicate —
@@ -119,14 +119,19 @@ body {
 
 .glow {
   position: absolute;
-  width: 450px;
-  height: 450px;
+  width: 1200px;
+  height: 1200px;
   border-radius: 50%;
-  filter: blur(130px);
+  filter: blur(90px);
   opacity: var(--glow-opacity);
+  background: radial-gradient(
+    circle at center,
+    currentColor 0%,
+    transparent 70%
+  );
   transition:
     opacity 0.5s ease,
-    background-color 0.5s ease;
+    color 0.5s ease;
   z-index: 0;
   pointer-events: none;
   transform: translate3d(0, 0, 0);
@@ -605,6 +610,22 @@ footer p {
 
   body {
     padding-top: var(--header-height);
+  }
+
+  /* Restore original glow sizes and positions for mobile */
+  .glow {
+    width: 550px;
+    height: 550px;
+  }
+
+  .glow-1 {
+    top: -170px;
+    left: -170px;
+  }
+
+  .glow-2 {
+    bottom: -100px;
+    right: -170px;
   }
 
   /* REMOVED: .fa-spin { animation-duration: 1.5s; } — class not used in HTML */
