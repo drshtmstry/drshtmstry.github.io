@@ -72,8 +72,6 @@ html[data-theme] {
   color: #0891b2;
 }
 
-/* REMOVED: .credentials top-of-file block was a partial duplicate —
-   the full definition lives further down with all properties together */
 [data-theme="dark"] .credentials {
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: none;
@@ -124,11 +122,13 @@ body {
   border-radius: 50%;
   filter: blur(90px);
   opacity: var(--glow-opacity);
-  background: radial-gradient(
+  background-color: currentColor;
+  -webkit-mask-image: radial-gradient(
     circle at center,
-    currentColor 0%,
+    black 0%,
     transparent 70%
   );
+  mask-image: radial-gradient(circle at center, black 0%, transparent 70%);
   transition:
     opacity 0.5s ease,
     color 0.5s ease;
@@ -222,12 +222,11 @@ button::-moz-focus-inner {
   margin-bottom: 16px;
   padding: 4px 14px;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.4px;
   color: var(--text-main);
-  background: rgba(59, 130, 246, 0.15);
-  background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: var(--bg-card);
+  border: 1px solid #fff;
   border-radius: 999px;
   box-shadow: 0 2px 10px rgba(59, 130, 246, 0.05);
 }
@@ -277,8 +276,8 @@ button::-moz-focus-inner {
 
 .btn-glass {
   background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  border: 1px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: var(--text-secondary);
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -294,7 +293,7 @@ button::-moz-focus-inner {
 
 [data-theme="dark"] .btn-glass {
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: none;
 }
 
@@ -448,6 +447,9 @@ button::-moz-focus-inner {
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-card);
 
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
   transition:
     transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.25s ease,
@@ -493,6 +495,7 @@ button::-moz-focus-inner {
 }
 
 .project-card {
+  grid-column: span 2;
   text-decoration: none;
 }
 
@@ -766,11 +769,6 @@ footer p {
    HOVER RULES — pointer devices only
    ========================================================================== */
 @media (hover: hover) {
-  .btn-glass:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-    transform: scale(1.02) translateZ(0);
-  }
-
   .btn-glass.linkedin:hover {
     background: #0077b5;
     border-color: #0077b5;
@@ -801,26 +799,8 @@ footer p {
     box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
   }
 
-  /* CARD HOVER (Light Theme) */
-  .card.active:hover {
-    transform: translateY(-2px);
-    z-index: 10;
-    border-color: rgba(255, 255, 255, 1);
-    box-shadow:
-      0 15px 35px -10px rgba(31, 38, 135, 0.15),
-      0 5px 15px -5px rgba(31, 38, 135, 0.05);
-  }
-
-  /* DARK THEME HOVER */
-  [data-theme="dark"] .card.active:hover {
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow:
-      0 12px 30px -5px rgba(59, 130, 246, 0.2),
-      0 0 15px rgba(59, 130, 246, 0.15);
-    transition:
-      transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
-      border-color 0.15s ease,
-      box-shadow 0.15s ease;
+  .project-card.active:hover {
+    border-color: var(--primary);
   }
 
   .project-card.active:hover .external-link-icon {
