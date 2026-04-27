@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
                     const scrollY = window.scrollY;
-                    blob1.style.transform = `translateY(${scrollY * 0.15}px)`;
-                    blob2.style.transform = `translateY(${scrollY * -0.15}px)`;
+                    blob1.style.transform = `translate3d(0, ${scrollY * 0.15}px, 0)`;
+                    blob2.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
                     ticking = false;
                 });
                 ticking = true;
