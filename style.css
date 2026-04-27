@@ -72,12 +72,8 @@ html[data-theme] {
   background: #0891b2;
 }
 
-.credentials {
-  background-color: transparent !important;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.05);
-}
-
+/* REMOVED: .credentials top-of-file block was a partial duplicate —
+   the full definition lives further down with all properties together */
 [data-theme="dark"] .credentials {
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: none;
@@ -143,10 +139,6 @@ button::-moz-focus-inner {
   border: 0;
 }
 
-.fade-in {
-  display: block;
-}
-
 @keyframes fadeUp {
   to {
     opacity: 1;
@@ -155,8 +147,8 @@ button::-moz-focus-inner {
 }
 
 /* --- UNIVERSAL REVEAL ANIMATION --- */
-.reveal,
-.card.reveal {
+/* .card.reveal is redundant — .card elements carry .reveal — single selector suffices */
+.reveal {
   opacity: 0;
   transform: translateY(30px) scale(1);
 
@@ -165,8 +157,7 @@ button::-moz-focus-inner {
     transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.reveal.active,
-.card.reveal.active {
+.reveal.active {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
@@ -204,7 +195,7 @@ button::-moz-focus-inner {
 
 .no-copy {
   user-select: none;
-  -ms-user-select: none;
+  /* -ms-user-select removed — IE only, no longer needed */
   -webkit-user-drag: none;
   -webkit-user-select: none;
 }
@@ -233,8 +224,10 @@ button::-moz-focus-inner {
   letter-spacing: 0.4px;
   color: var(--text-main);
   background: rgba(59, 130, 246, 0.15);
-  border: 1px solid var(--border-color);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 999px;
+  box-shadow: 0 2px 10px rgba(59, 130, 246, 0.05);
 }
 
 .credentials span {
@@ -285,11 +278,16 @@ button::-moz-focus-inner {
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
   color: var(--text-secondary);
-  -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: all 0.3s ease;
+  -webkit-backface-visibility: hidden;
+  /* transition: all replaced with specific properties to avoid full style recalc */
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 [data-theme="dark"] .btn-glass {
@@ -393,31 +391,13 @@ button::-moz-focus-inner {
   justify-content: center;
   margin-left: 10px;
 }
-#mobile-theme-toggle {
-  cursor: pointer;
-}
 
-#footer-theme-btn.btn-glass-sm {
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 50px;
-  background: transparent;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-card);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: var(--text-main);
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  white-space: nowrap;
-}
+/* REMOVED: #mobile-theme-toggle { cursor: pointer; }
+   — element does not exist in the HTML */
+
+/* --- MOBILE FOOTER THEME BUTTON ---
+   Moved fully inside the media query below since .mobile-show hides it on desktop.
+   The global rule was dead weight on desktop viewports. */
 
 .footer-theme-wrapper {
   position: relative;
@@ -474,9 +454,7 @@ button::-moz-focus-inner {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.card::before {
-  content: none;
-}
+/* REMOVED: .card::before { content: none; } — redundant, content defaults to none */
 
 .card-header {
   display: flex;
@@ -504,11 +482,8 @@ button::-moz-focus-inner {
   margin-bottom: 12px;
 }
 
-.sub-text {
-  font-size: 0.85rem;
-  opacity: 0.8;
-  margin-top: auto;
-}
+/* REMOVED: .sub-text — class not used anywhere in the HTML */
+/* REMOVED: .fade-in { display: block; } — class not used anywhere in the HTML */
 
 .about-card,
 .quote-card {
@@ -526,7 +501,10 @@ button::-moz-focus-inner {
   color: var(--text-secondary);
   opacity: 0.5;
   font-size: 0.9rem;
-  transition: all 0.25s ease;
+  /* transition: all replaced with specific properties */
+  transition:
+    opacity 0.25s ease,
+    color 0.25s ease;
 }
 
 .quote-card {
@@ -558,7 +536,10 @@ button::-moz-focus-inner {
   border: 1px solid var(--tag-border);
   border-radius: 6px;
   color: var(--text-secondary);
-  transition: all 0.2s ease;
+  /* transition: all replaced with specific properties */
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .tag-list li:has(a.li-link) {
@@ -594,10 +575,11 @@ footer p {
   display: none;
 }
 
+/* ==========================================================================
+   RESPONSIVE — single merged block (was split across two @media blocks)
+   ========================================================================== */
 @media (max-width: 1024px) {
-  :root {
-    --header-height: 60px;
-  }
+  /* REMOVED: :root { --header-height: 60px; } — identical to the :root default, redundant */
 
   .container {
     padding: 25px 20px;
@@ -628,9 +610,7 @@ footer p {
     padding-top: var(--header-height);
   }
 
-  .fa-spin {
-    animation-duration: 1.5s;
-  }
+  /* REMOVED: .fa-spin { animation-duration: 1.5s; } — class not used in HTML */
 
   .glass-nav {
     position: fixed;
@@ -704,11 +684,16 @@ footer p {
     margin-bottom: 20px;
   }
 
+  /* #footer-theme-btn styles live here only — button is hidden on desktop via .mobile-show */
   #footer-theme-btn.btn-glass-sm {
-    padding: 10px 15px;
-    border-radius: 99px;
-    border: 1px solid var(--border-color);
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 50px;
     background: rgba(var(--bg-card-rgb), 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
     color: var(--text-main);
     cursor: pointer;
     font-family: var(--font-body);
@@ -718,17 +703,12 @@ footer p {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-
-  /* --- Mobile Footer Button Animation --- */
-  #footer-theme-btn.btn-glass-sm {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-
-  #footer-theme-btn.btn-glass-sm:active {
-    transform: scale(0.96);
-    background: rgba(var(--bg-card-rgb), 0.5);
+    white-space: nowrap;
+    /* transition: all replaced with specific properties */
+    transition:
+      background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+      transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+      box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   .profile-header {
@@ -756,10 +736,16 @@ footer p {
   .project-card {
     grid-column: span 1;
   }
+
+  /* Disable card hover lift on touch devices */
+  .card:hover {
+    transform: none;
+    box-shadow: var(--shadow-card);
+  }
 }
 
 /* ==========================================================================
-   HOVER RULES BOX
+   HOVER RULES — pointer devices only
    ========================================================================== */
 @media (hover: hover) {
   .btn-glass:hover {
@@ -827,12 +813,5 @@ footer p {
   .tag-list li:hover {
     color: var(--text-main);
     border-color: var(--primary);
-  }
-}
-
-@media (max-width: 1024px) {
-  .card:hover {
-    transform: none;
-    box-shadow: var(--shadow-card);
   }
 }

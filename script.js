@@ -4,22 +4,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 1. THEME LOGIC ---
 
-    // Determine current theme
     const getCurrentTheme = () => {
         return docElement.getAttribute("data-theme") || storage.getItem("theme") || "light";
     };
 
-    // Set theme to DOM and Storage
     const setTheme = (themeName) => {
         docElement.setAttribute("data-theme", themeName);
         storage.setItem("theme", themeName);
     };
 
-    // Set Initial Theme
+    // Set initial theme
     const initialTheme = getCurrentTheme();
     docElement.setAttribute("data-theme", initialTheme);
 
-    // Theme Toggle Click Listener
+    // Remove transition block as early as possible (DOM ready, not window.load)
+    // A single rAF ensures the theme attribute paint has committed first
+    requestAnimationFrame(() => {
+        docElement.classList.remove('no-transition');
+    });
+
+    // Theme toggle click listener
     document.addEventListener("click", (event) => {
         const button = event.target.closest("#theme-toggle, #mobile-theme-toggle, #footer-theme-btn");
         if (button) {
@@ -31,17 +35,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 2. UI UTILITIES ---
 
-    // Footer Year Update
+    // Footer year
     const yearSpan = document.getElementById("current-year");
     if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-    // Background Blob Parallax (Desktop Only)
+    // Background blob parallax (desktop only)
     const blob1 = document.querySelector(".glow-1");
     const blob2 = document.querySelector(".glow-2");
 
-    // Added safety check (&& blob1 && blob2) to prevent errors on pages without blobs
     if (window.innerWidth > 1024 && blob1 && blob2) {
         let ticking = false;
+        // passive: true lets the browser optimise the scroll pipeline — prevents jank
         window.addEventListener("scroll", () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
@@ -52,10 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 ticking = true;
             }
-        });
+        }, { passive: true });
     }
 
-    // Scroll Reveal Animation
+    // Scroll reveal animation
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -64,13 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, {
-        threshold: 0.15
+        threshold: 0.1
     });
-    document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
 
-    // Enable Transitions After Page Load
-    window.addEventListener('load', () => {
-        document.body.classList.remove('no-transition');
-        document.documentElement.classList.remove('no-transition');
-    });
+    document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
 });
