@@ -98,4 +98,40 @@ document.addEventListener("DOMContentLoaded", () => {
         docElement.style.setProperty('--primary', color.hex);
         docElement.style.setProperty('--primary-rgb', color.rgb);
     }, 7000);
+
+    // --- 6. SCROLL ORBIT FOR HERO DOTS ---
+    const dotsContainer = document.querySelector(".image-open-container");
+    if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll(".floating-dot");
+        const baseAngles = [0, 120, 240];
+        
+        const updateOrbit = () => {
+            const scrollTop = window.scrollY;
+            // 1px of scroll = 0.2 degrees of rotation
+            const rotation = scrollTop * 0.2;
+            
+            const width = dotsContainer.clientWidth || 320;
+            const height = dotsContainer.clientHeight || 380;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = width / 2 + 15; // 15px offset outside the container border
+            
+            dots.forEach((dot, index) => {
+                if (index < 3) {
+                    const angleDeg = baseAngles[index] + rotation;
+                    const angleRad = (angleDeg * Math.PI) / 180;
+                    
+                    const x = centerX + radius * Math.cos(angleRad) - 6; // Subtract 6px (half of 12px dot width) to center it
+                    const y = centerY + radius * Math.sin(angleRad) - 6;
+                    
+                    dot.style.left = `${x}px`;
+                    dot.style.top = `${y}px`;
+                }
+            });
+        };
+        
+        window.addEventListener("scroll", updateOrbit, { passive: true });
+        window.addEventListener("resize", updateOrbit, { passive: true });
+        updateOrbit(); // Initial position setup
+    }
 });
