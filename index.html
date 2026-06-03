@@ -1,402 +1,362 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dr. Darshit Mistry | Portfolio</title>
 
-    <!-- SEO -->
-    <meta
-      name="description"
-      content="Dr. Darshit Mistry – M.B.B.S., M.D. (Microbiology) - Assistant Professor at Banas Medical College & Research Institute, Palanpur."
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Darshit Mistry | Portfolio</title>
 
-    <!-- Open Graph (social share previews) -->
-    <meta property="og:title" content="Dr. Darshit Mistry" />
-    <meta
-      property="og:description"
-      content="Assistant Professor of Microbiology at Banas Medical College, Palanpur. Clinical microbiologist and developer of healthcare digital tools."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://drshtmstry.github.io/" />
-    <meta
-      property="og:image"
-      content="https://drshtmstry.github.io/assets/profile.png"
-    />
+  <!-- SEO -->
+  <meta name="description"
+    content="Dr. Darshit Mistry – M.B.B.S., M.D. (Microbiology) - Assistant Professor at Banas Medical College & Research Institute, Palanpur." />
 
-    <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Open Graph (social share previews) -->
+  <meta property="og:title" content="Dr. Darshit Mistry" />
+  <meta property="og:description"
+    content="Assistant Professor of Microbiology at Banas Medical College, Palanpur. Clinical microbiologist and developer of healthcare digital tools." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://drshtmstry.github.io/" />
+  <meta property="og:image" content="https://drshtmstry.github.io/assets/profile.png" />
 
-    <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Figma Fonts: Montserrat/Inter/Outfit or similar -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/solid.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/brands.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  <link rel="stylesheet" href="style.css" />
 
-    <script>
-      // Immediately apply saved theme
-      (function () {
-        try {
-          const stored = localStorage.getItem("theme");
-          const prefersDark = window.matchMedia(
-            "(prefers-color-scheme:dark)",
-          ).matches;
-          const theme = stored || (prefersDark ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", theme);
-        } catch (e) {
-          document.documentElement.setAttribute("data-theme", "light");
-        }
-        document.documentElement.classList.add("no-transition");
-      })();
-    </script>
-  </head>
+  <!-- Figma Fonts: Montserrat/Inter/Outfit or similar -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/fontawesome.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/solid.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/brands.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <body>
-    <!-- Navigation Header -->
-    <header class="navbar">
-      <div class="nav-container">
-        <div class="logo">
-          <img src="assets/logo.png" alt="Logo" class="logo-img" />
-          <span class="logo-text">Dr. Darshit Mistry</span>
-        </div>
+  <script>
+    // Immediately apply saved theme
+    (function () {
+      try {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme:dark)",
+        ).matches;
+        const theme = stored || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+      document.documentElement.classList.add("no-transition");
+    })();
+  </script>
+</head>
 
-        <nav class="nav-links">
-          <a href="#about" class="nav-item">About</a>
-          <a href="#skills" class="nav-item">Skills</a>
-          <a href="#resume" class="nav-item">Resume</a>
-          <a href="#portfolio" class="nav-item">Portfolio</a>
-          <a href="#contact" class="nav-item">Contact</a>
-        </nav>
-
-        <div class="nav-actions">
-          <button
-            id="theme-toggle"
-            class="theme-toggle-btn"
-            aria-label="Toggle theme"
-          >
-            <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
-            <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
-          </button>
-        </div>
-
-        <!-- Mobile Hamburger Menu Button -->
-        <button class="menu-toggle" aria-label="Toggle mobile menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+<body>
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Logo" class="logo-img" />
+        <span class="logo-text">Dr. Darshit Mistry</span>
       </div>
-    </header>
 
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-nav-drawer">
-      <button class="close-drawer" aria-label="Close menu">&times;</button>
-      <nav class="mobile-nav-links">
-        <a href="#about" class="mobile-nav-item">About</a>
-        <a href="#skills" class="mobile-nav-item">Skills</a>
-        <a href="#resume" class="mobile-nav-item">Resume</a>
-        <a href="#portfolio" class="mobile-nav-item">Portfolio</a>
-        <a href="#contact" class="mobile-nav-item">Contact</a>
+      <nav class="nav-links">
+        <a href="#about" class="nav-item">About</a>
+        <a href="#skills" class="nav-item">Skills</a>
+        <a href="#resume" class="nav-item">Resume</a>
+        <a href="#portfolio" class="nav-item">Portfolio</a>
+        <a href="#contact" class="nav-item">Contact</a>
       </nav>
-      <button
-        id="mobile-theme-toggle"
-        class="mobile-theme-btn"
-        aria-label="Toggle theme"
-      >
-        <span class="theme-text-light">Dark Mode</span>
-        <span class="theme-text-dark">Light Mode</span>
-        <div class="mobile-theme-icon-container">
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
           <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
           <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
-        </div>
+        </button>
+      </div>
+
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="menu-toggle" aria-label="Toggle mobile menu">
+        <i class="fa-solid fa-bars"></i>
       </button>
     </div>
+  </header>
 
-    <main class="page-container">
-      <!-- HERO SECTION -->
-      <section id="about" class="hero-section">
-        <div class="decor-dots dots-left" style="top: 100px"></div>
-        <div class="decor-dots dots-right" style="top: 300px"></div>
-        <div class="hero-grid">
-          <div class="hero-info reveal-left reveal-stagger">
-            <h1 class="hero-title">
-              Bridging <span class="highlight">Microbiology & Tech</span>
-            </h1>
-            <p class="hero-desc">
-              I am an Assistant Professor of Microbiology at Banas Medical
-              College, Palanpur. I bridge medical microbiology and digital
-              automation by developing MS Access & PostgreSQL database-based
-              LIMS tools, reporting software, and websites.
-            </p>
-            <div class="hero-buttons">
-              <a href="#contact" class="btn btn-primary">Contact Me</a>
-            </div>
-          </div>
-
-          <div class="hero-media reveal-right">
-            <div class="image-open-container">
-              <div class="bg-gradient-circle"></div>
-              <div class="avatar-circle">
-                <img
-                  src="assets/profile.png"
-                  alt="Dr. Darshit Mistry"
-                  class="hero-avatar-open"
-                />
-              </div>
-              <!-- Decorative Floating Dots around Hero -->
-              <span class="floating-dot dot-blue"></span>
-              <span class="floating-dot dot-green"></span>
-              <span class="floating-dot dot-red"></span>
-            </div>
-          </div>
-        </div>
-        <!-- /.hero-grid -->
-      </section>
-
-      <!-- SKILLS SECTION -->
-      <section id="skills" class="skills-section reveal">
-        <div class="decor-dots dots-left" style="top: 50px"></div>
-        <div class="decor-dots dots-right" style="top: 220px"></div>
-        <div class="skills-grid">
-          <div class="skills-header">
-            <span class="section-badge">My Skills</span>
-            <h2>
-              Clinical &
-              <span class="highlight">Healthcare Tech</span> Expertise
-            </h2>
-            <p>
-              I integrate robust medical diagnostics with custom technology
-              infrastructure, ensuring seamless laboratory data flows and
-              improved clinical reporting.
-            </p>
-          </div>
-
-          <div class="skills-cards">
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fa-solid fa-microscope"></i>
-              </div>
-              <h3>Clinical Diagnostics</h3>
-              <p>
-                Clinical microbiology diagnostics, surveillance reporting, and
-                laboratory process optimization.
-              </p>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
-              <h3>LIMS Development</h3>
-              <p>
-                Designing Laboratory Information Management Systems for viral
-                load and surveillance data.
-              </p>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-              <h3>WHONET Integration</h3>
-              <p>
-                Configuring data pipelines to trace and report antimicrobial
-                resistance patterns effectively.
-              </p>
-            </div>
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-              </div>
-              <h3>Academic Teaching</h3>
-              <p>
-                Delivering medical curriculum, student mentorship, and running
-                practical labs.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- RESUME SECTION -->
-      <section id="resume" class="resume-section reveal">
-        <div class="decor-dots dots-left" style="top: 150px"></div>
-        <div class="decor-dots dots-right" style="top: 350px"></div>
-        <span class="section-badge">Experience &amp; Education</span>
-        <h2>Academic &amp; Professional Journey</h2>
-
-        <div class="resume-grid">
-          <!-- Professional Experience -->
-          <div class="resume-column-card">
-            <h3 class="resume-col-title">
-              <i class="fa-solid fa-briefcase"></i> Experience
-            </h3>
-            <div class="resume-timeline">
-              <div class="timeline-block">
-                <span class="timeline-date">June 2023 – Present</span>
-                <h4>Assistant Professor</h4>
-                <p class="timeline-subtitle">
-                  Banas Medical College &amp; Research Institute, Palanpur
-                </p>
-              </div>
-              <div class="timeline-block">
-                <span class="timeline-date">June 2022 – June 2023</span>
-                <h4>Senior Resident</h4>
-                <p class="timeline-subtitle">
-                  B. J. Medical College, Ahmedabad
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Education -->
-          <div class="resume-column-card">
-            <h3 class="resume-col-title">
-              <i class="fa-solid fa-graduation-cap"></i> Education
-            </h3>
-            <div class="resume-timeline">
-              <div class="timeline-block">
-                <span class="timeline-date">May 2022</span>
-                <h4>M.D. (Microbiology)</h4>
-                <p class="timeline-subtitle">
-                  B. J. Medical College, Ahmedabad (Gujarat University)
-                </p>
-              </div>
-              <div class="timeline-block">
-                <span class="timeline-date">August 2016</span>
-                <h4>M.B.B.S.</h4>
-                <p class="timeline-subtitle">
-                  B. J. Medical College, Ahmedabad (Gujarat University)
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PORTFOLIO SECTION -->
-      <section id="portfolio" class="portfolio-section reveal">
-        <div class="decor-dots dots-left" style="top: 80px"></div>
-        <div class="decor-dots dots-right" style="top: 280px"></div>
-        <div class="portfolio-top">
-          <div>
-            <span class="section-badge">Portfolio</span>
-            <h2>Latest <span class="highlight">Projects</span></h2>
-          </div>
-        </div>
-
-        <div class="projects-container">
-          <div class="project-card-figma">
-            <div class="project-card-header">
-              <span class="project-category">Healthcare Utility</span>
-              <h3>MCH Calculator</h3>
-            </div>
-            <p class="project-text">
-              A free clinical tool designed for Indian healthcare workers.
-              Automates ANC/PNC scheduling, growth tracking charts, and
-              vaccination plans.
-            </p>
-            <div class="project-footer">
-              <a
-                href="https://mchcalc.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-project-go"
-              >
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card-figma">
-            <div class="project-card-header">
-              <span class="project-category">Lab Information System</span>
-              <h3>Micro-LIMS</h3>
-            </div>
-            <p class="project-text">
-              A custom web application designed for viral load and surveillance
-              sample reporting, built to store, manage, and report
-              high-throughput diagnostic results dynamically.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span>React/Vite</span>
-                <span>PostgreSQL</span>
-              </div>
-              <a
-                href="https://microlims.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-project-go"
-              >
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-card-figma">
-            <div class="project-card-header">
-              <span class="project-category">Website Management</span>
-              <h3>BMCRI Website</h3>
-            </div>
-            <p class="project-text">
-              I oversee the institutional website for Banas Medical College &
-              Research Institute, ensuring public accessibility and content
-              coordination in collaboration with the IT team.
-            </p>
-            <div class="project-footer">
-              <div class="project-tags">
-                <span>WordPress</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT SECTION -->
-      <section id="contact" class="contact-section reveal">
-        <div class="decor-dots dots-left" style="top: 40px"></div>
-        <div class="decor-dots dots-right" style="top: 180px"></div>
-        <span class="section-badge">Contact</span>
-        <h2>Connect With Me</h2>
-
-        <div class="connect-grid" data-socials="contact"></div>
-      </section>
-    </main>
-
-    <!-- Vertical Social Sidebar (fixed) -->
-    <aside class="vertical-socials" aria-label="Social links">
-      <span class="social-label">Follow me on</span>
-      <span class="line-decor"></span>
-      <div data-socials="vertical"></div>
-    </aside>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-container">
-        <p>
-          &copy; <span id="current-year"></span> Dr. Darshit Mistry. All rights
-          Reserved.
-        </p>
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer">
+    <button class="close-drawer" aria-label="Close menu">&times;</button>
+    <nav class="mobile-nav-links">
+      <a href="#about" class="mobile-nav-item">About</a>
+      <a href="#skills" class="mobile-nav-item">Skills</a>
+      <a href="#resume" class="mobile-nav-item">Resume</a>
+      <a href="#portfolio" class="mobile-nav-item">Portfolio</a>
+      <a href="#contact" class="mobile-nav-item">Contact</a>
+    </nav>
+    <button id="mobile-theme-toggle" class="mobile-theme-btn" aria-label="Toggle theme">
+      <span class="theme-text-light">Dark Mode</span>
+      <span class="theme-text-dark">Light Mode</span>
+      <div class="mobile-theme-icon-container">
+        <i class="fa-solid fa-moon theme-icon" data-icon="moon"></i>
+        <i class="fa-solid fa-sun theme-icon" data-icon="sun"></i>
       </div>
-    </footer>
+    </button>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <main class="page-container">
+    <!-- HERO SECTION -->
+    <section id="about" class="hero-section">
+      <div class="decor-dots dots-left" style="top: 100px"></div>
+      <div class="decor-dots dots-right" style="top: 300px"></div>
+      <div class="hero-grid">
+        <div class="hero-info reveal-left reveal-stagger">
+          <h1 class="hero-title">
+            Dr. <span class="highlight">Darshit Mistry</span>
+          </h1>
+          <p class="hero-desc">
+            I am an Assistant Professor of Microbiology at Banas Medical
+            College, Palanpur. I bridge medical microbiology and digital
+            automation by developing MS Access & PostgreSQL database-based
+            LIMS tools, reporting software, and websites.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Contact Me</a>
+          </div>
+        </div>
+
+        <div class="hero-media reveal-right">
+          <div class="image-open-container">
+            <div class="bg-gradient-circle"></div>
+            <div class="avatar-circle">
+              <img src="assets/profile.png" alt="Dr. Darshit Mistry" class="hero-avatar-open" />
+            </div>
+            <!-- Decorative Floating Dots around Hero -->
+            <span class="floating-dot dot-blue"></span>
+            <span class="floating-dot dot-green"></span>
+            <span class="floating-dot dot-red"></span>
+          </div>
+        </div>
+      </div>
+      <!-- /.hero-grid -->
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section reveal">
+      <div class="decor-dots dots-left" style="top: 50px"></div>
+      <div class="decor-dots dots-right" style="top: 220px"></div>
+      <div class="skills-grid">
+        <div class="skills-header">
+          <span class="section-badge">My Skills</span>
+          <h2>
+            Clinical &
+            <span class="highlight">Healthcare Tech</span> Expertise
+          </h2>
+          <p>
+            I integrate robust medical diagnostics with custom technology
+            infrastructure, ensuring seamless laboratory data flows and
+            improved clinical reporting.
+          </p>
+        </div>
+
+        <div class="skills-cards">
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fa-solid fa-microscope"></i>
+            </div>
+            <h3>Clinical Diagnostics</h3>
+            <p>
+              Clinical microbiology diagnostics, surveillance reporting, and
+              laboratory process optimization.
+            </p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fa-solid fa-database"></i></div>
+            <h3>LIMS Development</h3>
+            <p>
+              Designing Laboratory Information Management Systems for viral
+              load and surveillance data.
+            </p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3>WHONET Integration</h3>
+            <p>
+              Configuring data pipelines to trace and report antimicrobial
+              resistance patterns effectively.
+            </p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3>Academic Teaching</h3>
+            <p>
+              Delivering medical curriculum, student mentorship, and running
+              practical labs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME SECTION -->
+    <section id="resume" class="resume-section reveal">
+      <div class="decor-dots dots-left" style="top: 150px"></div>
+      <div class="decor-dots dots-right" style="top: 350px"></div>
+      <span class="section-badge">Experience &amp; Education</span>
+      <h2>Academic &amp; Professional Journey</h2>
+
+      <div class="resume-grid">
+        <!-- Professional Experience -->
+        <div class="resume-column-card">
+          <h3 class="resume-col-title">
+            <i class="fa-solid fa-briefcase"></i> Experience
+          </h3>
+          <div class="resume-timeline">
+            <div class="timeline-block">
+              <span class="timeline-date">June 2023 – Present</span>
+              <h4>Assistant Professor</h4>
+              <p class="timeline-subtitle">
+                Banas Medical College &amp; Research Institute, Palanpur
+              </p>
+            </div>
+            <div class="timeline-block">
+              <span class="timeline-date">June 2022 – June 2023</span>
+              <h4>Senior Resident</h4>
+              <p class="timeline-subtitle">
+                B. J. Medical College, Ahmedabad
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="resume-column-card">
+          <h3 class="resume-col-title">
+            <i class="fa-solid fa-graduation-cap"></i> Education
+          </h3>
+          <div class="resume-timeline">
+            <div class="timeline-block">
+              <span class="timeline-date">May 2022</span>
+              <h4>M.D. (Microbiology)</h4>
+              <p class="timeline-subtitle">
+                B. J. Medical College, Ahmedabad (Gujarat University)
+              </p>
+            </div>
+            <div class="timeline-block">
+              <span class="timeline-date">August 2016</span>
+              <h4>M.B.B.S.</h4>
+              <p class="timeline-subtitle">
+                B. J. Medical College, Ahmedabad (Gujarat University)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio-section reveal">
+      <div class="decor-dots dots-left" style="top: 80px"></div>
+      <div class="decor-dots dots-right" style="top: 280px"></div>
+      <div class="portfolio-top">
+        <div>
+          <span class="section-badge">Portfolio</span>
+          <h2>Latest <span class="highlight">Projects</span></h2>
+        </div>
+      </div>
+
+      <div class="projects-container">
+        <div class="project-card-figma">
+          <div class="project-card-header">
+            <span class="project-category">Healthcare Utility</span>
+            <h3>MCH Calculator</h3>
+          </div>
+          <p class="project-text">
+            A free clinical tool designed for Indian healthcare workers.
+            Automates ANC/PNC scheduling, growth tracking charts, and
+            vaccination plans.
+          </p>
+          <div class="project-footer">
+            <a href="https://mchcalc.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-project-go">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-figma">
+          <div class="project-card-header">
+            <span class="project-category">Lab Information System</span>
+            <h3>Micro-LIMS</h3>
+          </div>
+          <p class="project-text">
+            A custom web application designed for viral load and surveillance
+            sample reporting, built to store, manage, and report
+            high-throughput diagnostic results dynamically.
+          </p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span>React/Vite</span>
+              <span>PostgreSQL</span>
+            </div>
+            <a href="https://microlims.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-project-go">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card-figma">
+          <div class="project-card-header">
+            <span class="project-category">Website Management</span>
+            <h3>BMCRI Website</h3>
+          </div>
+          <p class="project-text">
+            I oversee the institutional website for Banas Medical College &
+            Research Institute, ensuring public accessibility and content
+            coordination in collaboration with the IT team.
+          </p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span>WordPress</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section reveal">
+      <div class="decor-dots dots-left" style="top: 40px"></div>
+      <div class="decor-dots dots-right" style="top: 180px"></div>
+      <span class="section-badge">Contact</span>
+      <h2>Connect With Me</h2>
+
+      <div class="connect-grid" data-socials="contact"></div>
+    </section>
+  </main>
+
+  <!-- Vertical Social Sidebar (fixed) -->
+  <aside class="vertical-socials" aria-label="Social links">
+    <span class="social-label">Follow me on</span>
+    <span class="line-decor"></span>
+    <div data-socials="vertical"></div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>
+        &copy; <span id="current-year"></span> Dr. Darshit Mistry. All rights
+        Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
