@@ -97,10 +97,26 @@ body {
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.reveal-stagger.active > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
-.reveal-stagger.active > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
-.reveal-stagger.active > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
-.reveal-stagger.active > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
+.reveal-stagger.active > *:nth-child(1) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+.reveal-stagger.active > *:nth-child(2) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.1s;
+}
+.reveal-stagger.active > *:nth-child(3) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
+}
+.reveal-stagger.active > *:nth-child(4) {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.3s;
+}
 
 /* Slide-from-left for hero info */
 .reveal-left {
@@ -247,7 +263,7 @@ body {
 }
 
 .nav-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -334,10 +350,10 @@ body {
 }
 
 .btn-primary::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   opacity: 0;
   transition: opacity 0.2s;
 }
@@ -362,9 +378,6 @@ body {
   background: rgba(var(--primary-rgb), 0.05);
   transform: translateY(-2px);
 }
-
-
-
 
 .highlight {
   color: var(--primary);
@@ -465,8 +478,14 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%   { transform: translate(-50%, -50%) scale(1);    opacity: 0.8; }
-  100% { transform: translate(-50%, -50%) scale(1.12); opacity: 1;   }
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 1;
+  }
 }
 
 .avatar-circle {
@@ -503,7 +522,7 @@ body {
 .vertical-socials {
   position: fixed;
   right: 24px;
-  bottom: 40px;
+  bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -617,10 +636,18 @@ body {
   transform: translateY(0);
 }
 
-.skills-section.active .skill-card:nth-child(1) { transition-delay: 0.05s; }
-.skills-section.active .skill-card:nth-child(2) { transition-delay: 0.15s; }
-.skills-section.active .skill-card:nth-child(3) { transition-delay: 0.25s; }
-.skills-section.active .skill-card:nth-child(4) { transition-delay: 0.35s; }
+.skills-section.active .skill-card:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.skills-section.active .skill-card:nth-child(2) {
+  transition-delay: 0.15s;
+}
+.skills-section.active .skill-card:nth-child(3) {
+  transition-delay: 0.25s;
+}
+.skills-section.active .skill-card:nth-child(4) {
+  transition-delay: 0.35s;
+}
 
 .skill-card:hover {
   transform: translateY(-6px) scale(1.02);
@@ -965,7 +992,9 @@ body {
   flex-direction: column;
   gap: 40px;
   visibility: hidden;
-  transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
 }
 
 .mobile-nav-drawer.open {
@@ -974,7 +1003,9 @@ body {
 }
 
 [data-theme="dark"] .mobile-nav-drawer {
-  box-shadow: -15px 0 40px rgba(0, 0, 0, 0.5), -1px 0 0 rgba(255, 255, 255, 0.06);
+  box-shadow:
+    -15px 0 40px rgba(0, 0, 0, 0.5),
+    -1px 0 0 rgba(255, 255, 255, 0.06);
 }
 
 .close-drawer {
@@ -1019,7 +1050,9 @@ body {
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
   margin-top: auto; /* Push to the bottom of the drawer */
 }
 
@@ -1095,8 +1128,12 @@ body {
   transform: translateY(0);
 }
 
-.resume-section.active .resume-column-card:nth-child(1) { transition-delay: 0.05s; }
-.resume-section.active .resume-column-card:nth-child(2) { transition-delay: 0.18s; }
+.resume-section.active .resume-column-card:nth-child(1) {
+  transition-delay: 0.05s;
+}
+.resume-section.active .resume-column-card:nth-child(2) {
+  transition-delay: 0.18s;
+}
 
 .resume-column-card:hover {
   border-color: rgba(var(--primary-rgb), 0.35);
