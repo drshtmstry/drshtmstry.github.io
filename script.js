@@ -62,6 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 3. SCROLL REVEAL ANIMATION ---
 
+    const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
+
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -73,7 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
         threshold: 0.08
     });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll(revealSelectors).forEach(el => observer.observe(el));
+
+    // Immediately activate hero elements (already in viewport on load)
+    document.querySelectorAll('.hero-section ' + revealSelectors.split(',').join(', .hero-section ')).forEach(el => {
+        el.classList.add('active');
+    });
 
     // --- 4. FOOTER YEAR ---
 
@@ -82,7 +89,45 @@ document.addEventListener("DOMContentLoaded", () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- 5. DYNAMIC ACCENT COLOR CYCLE ---
+    // --- 5. SOCIAL LINKS (single source of truth) ---
+
+    const SOCIALS = [
+        {
+            name: "LinkedIn",
+            url: "https://www.linkedin.com/in/drshtmstry",
+            icon: "fab fa-linkedin",
+            label: "linkedin.com/in/drshtmstry",
+        },
+        {
+            name: "GitHub",
+            url: "https://github.com/drshtmstry",
+            icon: "fab fa-github",
+            label: "github.com/drshtmstry",
+        },
+    ];
+
+    const renderSocials = () => {
+        // Vertical sidebar only: icon-only links
+        document.querySelectorAll('[data-socials="vertical"]').forEach(container => {
+            container.innerHTML = SOCIALS.map(s =>
+                `<a href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="${s.name}"><i class="${s.icon}"></i></a>`
+            ).join("");
+        });
+
+        // Contact section: full cards
+        document.querySelectorAll('[data-socials="contact"]').forEach(container => {
+            container.innerHTML = SOCIALS.map(s =>
+                `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="connect-card">
+                    <div class="connect-icon"><i class="${s.icon}"></i></div>
+                    <h3>${s.name}</h3>
+                    <p>${s.label}</p>
+                </a>`
+            ).join("");
+        });
+    };
+
+    renderSocials();
+
     const accentColors = [
         { hex: '#00b87c', rgb: '0, 184, 124' },  // Emerald
         { hex: '#3b82f6', rgb: '59, 130, 246' },  // Electric Blue

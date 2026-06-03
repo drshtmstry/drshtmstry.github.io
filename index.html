@@ -138,23 +138,22 @@
         <div class="decor-dots dots-left" style="top: 100px"></div>
         <div class="decor-dots dots-right" style="top: 300px"></div>
         <div class="hero-grid">
-          <div class="hero-info reveal">
+          <div class="hero-info reveal-left reveal-stagger">
             <h1 class="hero-title">
               Bridging <span class="highlight">Microbiology & Tech</span>
             </h1>
             <p class="hero-desc">
               I am an Assistant Professor of Microbiology at Banas Medical
-              College, Palanpur. I bridge clinical sciences and digital
-              automation by developing PostgreSQL and web application
-              database-based LIMS systems, diagnostic software, and website
-              tools.
+              College, Palanpur. I bridge medical microbiology and digital
+              automation by developing MS Access & PostgreSQL database-based
+              LIMS tools, reporting software, and websites.
             </p>
             <div class="hero-buttons">
               <a href="#contact" class="btn btn-primary">Contact Me</a>
             </div>
           </div>
 
-          <div class="hero-media reveal">
+          <div class="hero-media reveal-right">
             <div class="image-open-container">
               <div class="bg-gradient-circle"></div>
               <div class="avatar-circle">
@@ -171,23 +170,7 @@
             </div>
           </div>
         </div>
-
-        <div class="vertical-socials">
-          <span class="social-label">Follow me on</span>
-          <span class="line-decor"></span>
-          <a
-            href="https://www.linkedin.com/in/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a
-            href="https://github.com/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
+        <!-- /.hero-grid -->
       </section>
 
       <!-- SKILLS SECTION -->
@@ -255,12 +238,12 @@
       <section id="resume" class="resume-section reveal">
         <div class="decor-dots dots-left" style="top: 150px"></div>
         <div class="decor-dots dots-right" style="top: 350px"></div>
-        <span class="section-badge">Experience & Education</span>
-        <h2>Academic & Professional Journey</h2>
+        <span class="section-badge">Experience &amp; Education</span>
+        <h2>Academic &amp; Professional Journey</h2>
 
         <div class="resume-grid">
           <!-- Professional Experience -->
-          <div class="resume-column">
+          <div class="resume-column-card">
             <h3 class="resume-col-title">
               <i class="fa-solid fa-briefcase"></i> Experience
             </h3>
@@ -269,7 +252,7 @@
                 <span class="timeline-date">June 2023 – Present</span>
                 <h4>Assistant Professor</h4>
                 <p class="timeline-subtitle">
-                  Banas Medical College & Research Institute, Palanpur
+                  Banas Medical College &amp; Research Institute, Palanpur
                 </p>
               </div>
               <div class="timeline-block">
@@ -283,7 +266,7 @@
           </div>
 
           <!-- Education -->
-          <div class="resume-column">
+          <div class="resume-column-card">
             <h3 class="resume-col-title">
               <i class="fa-solid fa-graduation-cap"></i> Education
             </h3>
@@ -393,30 +376,16 @@
         <span class="section-badge">Contact</span>
         <h2>Connect With Me</h2>
 
-        <div class="connect-grid">
-          <a
-            href="https://www.linkedin.com/in/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="connect-card"
-          >
-            <div class="connect-icon"><i class="fab fa-linkedin"></i></div>
-            <h3>LinkedIn</h3>
-            <p>linkedin.com/in/drshtmstry</p>
-          </a>
-          <a
-            href="https://github.com/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="connect-card"
-          >
-            <div class="connect-icon"><i class="fab fa-github"></i></div>
-            <h3>GitHub</h3>
-            <p>github.com/drshtmstry</p>
-          </a>
-        </div>
+        <div class="connect-grid" data-socials="contact"></div>
       </section>
     </main>
+
+    <!-- Vertical Social Sidebar (fixed) -->
+    <aside class="vertical-socials" aria-label="Social links">
+      <span class="social-label">Follow me on</span>
+      <span class="line-decor"></span>
+      <div data-socials="vertical"></div>
+    </aside>
 
     <!-- Footer -->
     <footer class="footer">
@@ -425,20 +394,6 @@
           &copy; <span id="current-year"></span> Dr. Darshit Mistry. All rights
           Reserved.
         </p>
-        <div class="footer-socials">
-          <a
-            href="https://www.linkedin.com/in/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-linkedin"></i
-          ></a>
-          <a
-            href="https://github.com/drshtmstry"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><i class="fab fa-github"></i
-          ></a>
-        </div>
       </div>
     </footer>
 
