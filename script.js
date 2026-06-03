@@ -17,15 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const initialTheme = getCurrentTheme();
     docElement.setAttribute("data-theme", initialTheme);
 
-    // Remove transition block as early as possible (DOM ready, not window.load)
-    // A single rAF ensures the theme attribute paint has committed first
+    // Remove transition block
     requestAnimationFrame(() => {
         docElement.classList.remove('no-transition');
     });
 
-    // Theme toggle click listener
+    // Theme toggle click listener (covers theme-toggle-btn and mobile-theme-toggle)
     document.addEventListener("click", (event) => {
-        const button = event.target.closest("#theme-toggle, #mobile-theme-toggle, #footer-theme-btn");
+        const button = event.target.closest("#theme-toggle, #mobile-theme-toggle");
         if (button) {
             event.preventDefault();
             const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
@@ -33,33 +32,36 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 2. UI UTILITIES ---
+    // --- 2. MOBILE DRAWER INTERACTION ---
 
-    // Footer year
-    const yearSpan = document.getElementById("current-year");
-    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+    const menuToggle = document.querySelector(".menu-toggle");
+    const closeDrawer = document.querySelector(".close-drawer");
+    const mobileDrawer = document.querySelector(".mobile-nav-drawer");
+    const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
 
-    // Background blob parallax (desktop only)
-    const blob1 = document.querySelector(".glow-1");
-    const blob2 = document.querySelector(".glow-2");
-
-    if (window.innerWidth > 1024 && blob1 && blob2) {
-        let ticking = false;
-        // passive: true lets the browser optimise the scroll pipeline — prevents jank
-        window.addEventListener("scroll", () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    const scrollY = window.scrollY;
-                    blob1.style.transform = `translate3d(0, ${scrollY * 0.15}px, 0)`;
-                    blob2.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
+    if (menuToggle && mobileDrawer) {
+        menuToggle.addEventListener("click", () => {
+            mobileDrawer.classList.add("open");
+        });
     }
 
-    // Scroll reveal animation
+    if (closeDrawer && mobileDrawer) {
+        closeDrawer.addEventListener("click", () => {
+            mobileDrawer.classList.remove("open");
+        });
+    }
+
+    // Close drawer when link clicked
+    mobileNavItems.forEach(item => {
+        item.addEventListener("click", () => {
+            if (mobileDrawer) {
+                mobileDrawer.classList.remove("open");
+            }
+        });
+    });
+
+    // --- 3. SCROLL REVEAL ANIMATION ---
+
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -68,8 +70,32 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.08
     });
 
-    document.querySelectorAll('.reveal').forEach(card => observer.observe(card));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // --- 4. FOOTER YEAR ---
+
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- 5. DYNAMIC ACCENT COLOR CYCLE ---
+    const accentColors = [
+        { hex: '#00b87c', rgb: '0, 184, 124' },  // Emerald
+        { hex: '#3b82f6', rgb: '59, 130, 246' },  // Electric Blue
+        { hex: '#8b5cf6', rgb: '139, 92, 246' },  // Purple
+        { hex: '#ec4899', rgb: '236, 72, 153' },  // Pink
+        { hex: '#14b8a6', rgb: '20, 184, 166' }   // Teal
+    ];
+    let currentColorIndex = 0;
+    
+    setInterval(() => {
+        currentColorIndex = (currentColorIndex + 1) % accentColors.length;
+        const color = accentColors[currentColorIndex];
+        docElement.style.setProperty('--primary', color.hex);
+        docElement.style.setProperty('--primary-rgb', color.rgb);
+    }, 7000);
 });
