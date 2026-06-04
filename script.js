@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const docElement = document.documentElement;
     const storage = localStorage;
 
+    let isNavScrolling = false;
+    let navTargetSectionId = null;
+    let activeScrollCleanup = null;
+
     // --- UTILITY: THROTTLE FUNCTION ---
     const throttle = (func, limit) => {
         let inThrottle;
@@ -95,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
 
     const observer = new IntersectionObserver((entries, obs) => {
+        if (isNavScrolling) return; // Ignore observer during programmatic nav scrolls
+        
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
@@ -288,6 +294,117 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
         addEventListenerWithCleanup(card, "mouseleave", handleMouseLeave, false);
     });
+
+    // --- 9. SMOOTH SCROLL FOR INTERNALS & ANIMATION SYNC ---
+    const handleAnchorClick = (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+
+        const targetId = link.getAttribute("href");
+        if (targetId === "#") return;
+
+        let targetElement;
+        try {
+            targetElement = document.querySelector(targetId);
+        } catch (e) {
+            return;
+        }
+        if (!targetElement) return;
+
+        event.preventDefault();
+
+        const startY = window.scrollY;
+        const targetRect = targetElement.getBoundingClientRect();
+        const targetTop = targetRect.top + startY;
+        const targetY = targetTop - 64; // Header offset
+        const totalDistance = Math.abs(targetY - startY);
+        
+        // If we are already extremely close, just update URL hash and activate immediately
+        if (totalDistance < 10) {
+            if (history.pushState) {
+                history.pushState(null, null, targetId);
+            } else {
+                location.hash = targetId;
+            }
+            
+            // Activate target section elements immediately
+            const selectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
+            if (targetElement.matches(selectors)) {
+                targetElement.classList.add('active');
+            }
+            targetElement.querySelectorAll(selectors).forEach(el => {
+                el.classList.add('active');
+            });
+            return;
+        }
+
+        // Cancel any active scroll finalization from previous link clicks
+        if (activeScrollCleanup) {
+            activeScrollCleanup();
+        }
+
+        // Set scrolling flag and add layout override class
+        isNavScrolling = true;
+        navTargetSectionId = targetId;
+        docElement.classList.add("nav-scrolling");
+
+        // Scroll smoothly to target element
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+
+        // Update URL hash without jumping
+        if (history.pushState) {
+            history.pushState(null, null, targetId);
+        } else {
+            location.hash = targetId;
+        }
+
+        let scrollTimeout = null;
+
+        const cleanupScroll = () => {
+            window.removeEventListener("scroll", onScrollFallback);
+            window.removeEventListener("scrollend", onScrollEndEvent);
+            clearTimeout(scrollTimeout);
+            docElement.classList.remove("nav-scrolling");
+            activeScrollCleanup = null;
+        };
+
+        activeScrollCleanup = cleanupScroll;
+
+        const finalizeScroll = () => {
+            cleanupScroll();
+            isNavScrolling = false;
+            navTargetSectionId = null;
+
+            // Activate target section elements after landing
+            const selectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
+            if (targetElement.matches(selectors)) {
+                targetElement.classList.add('active');
+            }
+            targetElement.querySelectorAll(selectors).forEach(el => {
+                el.classList.add('active');
+            });
+        };
+
+        const onScrollFallback = () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(finalizeScroll, 100);
+        };
+
+        const onScrollEndEvent = () => {
+            finalizeScroll();
+        };
+
+        if ("onscrollend" in window) {
+            window.addEventListener("scrollend", onScrollEndEvent);
+        }
+        
+        window.addEventListener("scroll", onScrollFallback);
+        // Safety timeout in case scroll doesn't happen or handles weirdly
+        scrollTimeout = setTimeout(finalizeScroll, 1500);
+    };
+
+    // Register anchor click listener (covers all internal link navigations, navbar, drawer, buttons, dots)
+    addEventListenerWithCleanup(document, "click", handleAnchorClick);
 
     // --- 10. PARALLAX EFFECT FOR DECORATIVE ELEMENTS ---
     const decorDots = document.querySelectorAll(".decor-dots");
