@@ -608,7 +608,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), filter 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform, filter;
 }
 
@@ -754,7 +757,9 @@ body {
   justify-content: center;
   align-items: flex-end;
   border: 3px solid rgba(var(--primary-rgb), 0.15);
-  transition: border-color 0.8s ease, background-color var(--transition-base);
+  transition:
+    border-color 0.8s ease,
+    background-color var(--transition-base);
 }
 
 .hero-avatar-open {
@@ -950,10 +955,22 @@ body {
   animation: bounce-entrance var(--transition-bounce) ease-out forwards;
 }
 
-.skills-section.active .skill-card:nth-child(1) { transition-delay: 0.3s; animation-delay: 0.3s; }
-.skills-section.active .skill-card:nth-child(2) { transition-delay: 0.42s; animation-delay: 0.42s; }
-.skills-section.active .skill-card:nth-child(3) { transition-delay: 0.54s; animation-delay: 0.54s; }
-.skills-section.active .skill-card:nth-child(4) { transition-delay: 0.66s; animation-delay: 0.66s; }
+.skills-section.active .skill-card:nth-child(1) {
+  transition-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+.skills-section.active .skill-card:nth-child(2) {
+  transition-delay: 0.42s;
+  animation-delay: 0.42s;
+}
+.skills-section.active .skill-card:nth-child(3) {
+  transition-delay: 0.54s;
+  animation-delay: 0.54s;
+}
+.skills-section.active .skill-card:nth-child(4) {
+  transition-delay: 0.66s;
+  animation-delay: 0.66s;
+}
 
 .skill-card:hover {
   transform: translate3d(0, -8px, 0);
@@ -1021,7 +1038,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
-  transition: 
+  transition:
     transform var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base),
@@ -1030,7 +1047,7 @@ body {
   overflow: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  
+
   /* Initial state for reveal */
   opacity: 0;
   transform: translateY(32px);
@@ -1041,10 +1058,18 @@ body {
   transform: translateY(0);
 }
 
-.portfolio-section.active .project-card-figma:nth-child(1) { transition-delay: 0.3s; }
-.portfolio-section.active .project-card-figma:nth-child(2) { transition-delay: 0.42s; }
-.portfolio-section.active .project-card-figma:nth-child(3) { transition-delay: 0.54s; }
-.portfolio-section.active .project-card-figma:nth-child(4) { transition-delay: 0.66s; }
+.portfolio-section.active .project-card-figma:nth-child(1) {
+  transition-delay: 0.3s;
+}
+.portfolio-section.active .project-card-figma:nth-child(2) {
+  transition-delay: 0.42s;
+}
+.portfolio-section.active .project-card-figma:nth-child(3) {
+  transition-delay: 0.54s;
+}
+.portfolio-section.active .project-card-figma:nth-child(4) {
+  transition-delay: 0.66s;
+}
 
 .project-card-figma:hover {
   transform: translate3d(0, -8px, 0);
@@ -1278,7 +1303,7 @@ body {
   align-items: center;
   gap: 24px;
   box-shadow: var(--shadow-sm);
-  transition: 
+  transition:
     transform var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base),
@@ -1288,7 +1313,7 @@ body {
   overflow: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  
+
   /* Initial state for reveal */
   opacity: 0;
   transform: translateY(24px);
@@ -1299,8 +1324,12 @@ body {
   transform: translateY(0);
 }
 
-.contact-section.active .connect-card:nth-child(1) { transition-delay: 0.48s; }
-.contact-section.active .connect-card:nth-child(2) { transition-delay: 0.62s; }
+.contact-section.active .connect-card:nth-child(1) {
+  transition-delay: 0.48s;
+}
+.contact-section.active .connect-card:nth-child(2) {
+  transition-delay: 0.62s;
+}
 
 .connect-card:hover {
   transform: translate3d(0, -5px, 0);
@@ -1550,7 +1579,7 @@ body {
   border-radius: 16px;
   padding: 32px;
   box-shadow: var(--shadow-sm);
-  transition: 
+  transition:
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     border-color var(--transition-base),
@@ -1603,34 +1632,52 @@ body {
   border-radius: 12px;
   background: transparent;
   border: 1px solid transparent;
-  transition: 
+  transition:
     opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     background-color var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
-  will-change: transform, opacity, background-color, border-color, box-shadow;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  will-change: opacity, background-color, border-color, box-shadow;
   opacity: 0;
-  transform: translate3d(-24px, 0, 0);
+  transform: translateX(-24px);
+}
+
+@keyframes timeline-block-reveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .resume-section.active .timeline-block {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translateX(0);
+  animation: timeline-block-reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.resume-section.active .timeline-block:nth-child(1) { transition-delay: 0.45s; }
-.resume-section.active .timeline-block:nth-child(2) { transition-delay: 0.58s; }
-.resume-section.active .timeline-block:nth-child(3) { transition-delay: 0.7s; }
-.resume-section.active .timeline-block:nth-child(4) { transition-delay: 0.82s; }
+.resume-section.active .timeline-block:nth-child(1) {
+  animation-delay: 0.45s;
+}
+.resume-section.active .timeline-block:nth-child(2) {
+  animation-delay: 0.58s;
+}
+.resume-section.active .timeline-block:nth-child(3) {
+  animation-delay: 0.7s;
+}
+.resume-section.active .timeline-block:nth-child(4) {
+  animation-delay: 0.82s;
+}
 
-.timeline-block:hover {
+.resume-section.active .timeline-block:hover {
   background: var(--bg-card);
   border-color: var(--primary);
   box-shadow: var(--shadow-md);
-  transform: translate3d(10px, 0, 0);
+  transform: translateX(10px);
   transition-delay: 0s !important;
 }
 
@@ -1647,14 +1694,14 @@ body {
   z-index: 2;
   transition:
     background-color var(--transition-base),
-    transform var(--transition-base),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow var(--transition-base);
-  will-change: transform, box-shadow;
+  will-change: box-shadow;
 }
 
-.timeline-block:hover::before {
+.resume-section.active .timeline-block:hover::before {
   background: var(--primary);
-  transform: translate3d(-10px, 0, 0) scale(1.3);
+  transform: translateX(-10px) scale(1.3);
   box-shadow: 0 0 12px rgba(var(--primary-rgb), 0.7);
 }
 
@@ -1724,7 +1771,7 @@ body {
 .contact-info-side > p {
   opacity: 0;
   transform: translate3d(-30px, 0, 0);
-  transition: 
+  transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
@@ -1740,12 +1787,42 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-.skills-section.active .skills-header { transition-delay: 0.15s; }
-.resume-section.active h2 { transition-delay: 0.15s; }
-.portfolio-section.active .portfolio-top h2 { transition-delay: 0.15s; }
-.contact-section.active .contact-info-side > span { transition-delay: 0.1s; }
-.contact-section.active .contact-info-side > h2 { transition-delay: 0.22s; }
-.contact-section.active .contact-info-side > p { transition-delay: 0.35s; }
+.skills-section.active .skills-header {
+  transition-delay: 0.15s;
+}
+.resume-section.active h2 {
+  transition-delay: 0.15s;
+}
+.portfolio-section.active .portfolio-top h2 {
+  transition-delay: 0.15s;
+}
+.contact-section.active .contact-info-side > span {
+  transition-delay: 0.1s;
+}
+.contact-section.active .contact-info-side > h2 {
+  transition-delay: 0.22s;
+}
+.contact-section.active .contact-info-side > p {
+  transition-delay: 0.35s;
+}
+
+/* Continuous floating horizontal motion for active section headers */
+@keyframes float-horizontal {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
+.skills-section.active h2,
+.resume-section.active h2,
+.portfolio-section.active h2,
+.contact-section.active h2 {
+  animation: float-horizontal 2s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
 
 /* SECTION INDICATOR (LEFT DOTS) */
 .section-indicator {
