@@ -252,10 +252,12 @@ document.addEventListener("DOMContentLoaded", () => {
     addEventListenerWithCleanup(window, "scroll", updateActiveNav, { passive: true });
     updateActiveNav(); // Initial call
 
-    // --- 8. CARD TILT EFFECT (3D Perspective) ---
+    // --- 8. CARD TILT EFFECT (3D Perspective) + CONNECT CARD RADIAL GRADIENT ---
     const cards = document.querySelectorAll(".skill-card, .connect-card");
 
     cards.forEach(card => {
+        const isConnectCard = card.classList.contains("connect-card");
+
         const handleMouseMove = (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -268,31 +270,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const rotateY = ((centerX - x) / centerX) * 5;
 
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            if (isConnectCard) {
+                card.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
+                card.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
+            }
         };
 
         const handleMouseLeave = () => {
             card.style.transform = "";
-        };
-
-        addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
-        addEventListenerWithCleanup(card, "mouseleave", handleMouseLeave, false);
-    });
-
-    // --- 9. CONNECT CARD RADIAL GRADIENT TRACKING ---
-    const connectCards = document.querySelectorAll(".connect-card");
-    connectCards.forEach(card => {
-        const handleMouseMove = (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-            card.style.setProperty("--mouse-x", `${x}%`);
-            card.style.setProperty("--mouse-y", `${y}%`);
-        };
-
-        const handleMouseLeave = () => {
-            card.style.setProperty("--mouse-x", "50%");
-            card.style.setProperty("--mouse-y", "50%");
+            if (isConnectCard) {
+                card.style.setProperty("--mouse-x", "50%");
+                card.style.setProperty("--mouse-y", "50%");
+            }
         };
 
         addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
