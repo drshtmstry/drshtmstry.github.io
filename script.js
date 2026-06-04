@@ -2,6 +2,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const docElement = document.documentElement;
     const storage = localStorage;
 
+    // --- UTILITY: THROTTLE FUNCTION ---
+    const throttle = (func, limit) => {
+        let inThrottle;
+        return function (...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    };
+
+    // Store event listeners for cleanup
+    const eventListeners = [];
+    const addEventListenerWithCleanup = (target, event, handler, options = false) => {
+        target.addEventListener(event, handler, options);
+        eventListeners.push({ target, event, handler, options });
+    };
+
+    // Cleanup function for memory efficiency
+    const cleanup = () => {
+        eventListeners.forEach(({ target, event, handler, options }) => {
+            target.removeEventListener(event, handler, options);
+        });
+    };
+
     // --- 1. THEME LOGIC ---
 
     const getCurrentTheme = () => {
@@ -23,14 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Theme toggle click listener (covers theme-toggle-btn and mobile-theme-toggle)
-    document.addEventListener("click", (event) => {
+    const handleThemeToggle = (event) => {
         const button = event.target.closest("#theme-toggle, #mobile-theme-toggle");
         if (button) {
             event.preventDefault();
             const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
             setTheme(newTheme);
         }
-    });
+    };
+    addEventListenerWithCleanup(document, "click", handleThemeToggle);
 
     // --- 2. MOBILE DRAWER INTERACTION ---
 
@@ -40,24 +67,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
 
     if (menuToggle && mobileDrawer) {
-        menuToggle.addEventListener("click", () => {
+        const handleMenuToggle = () => {
             mobileDrawer.classList.add("open");
-        });
+        };
+        addEventListenerWithCleanup(menuToggle, "click", handleMenuToggle);
     }
 
     if (closeDrawer && mobileDrawer) {
-        closeDrawer.addEventListener("click", () => {
+        const handleCloseDrawer = () => {
             mobileDrawer.classList.remove("open");
-        });
+        };
+        addEventListenerWithCleanup(closeDrawer, "click", handleCloseDrawer);
     }
 
     // Close drawer when link clicked
     mobileNavItems.forEach(item => {
-        item.addEventListener("click", () => {
+        const handleNavClick = () => {
             if (mobileDrawer) {
                 mobileDrawer.classList.remove("open");
             }
-        });
+        };
+        addEventListenerWithCleanup(item, "click", handleNavClick);
     });
 
     // --- 3. SCROLL REVEAL ANIMATION ---
@@ -68,11 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                obs.unobserve(entry.target);
+            } else {
+                entry.target.classList.remove('active');
             }
         });
     }, {
-        threshold: 0.08
+        threshold: 0.1
     });
 
     document.querySelectorAll(revealSelectors).forEach(el => observer.observe(el));
@@ -119,8 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
             container.innerHTML = SOCIALS.map(s =>
                 `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="connect-card">
                     <div class="connect-icon"><i class="${s.icon}"></i></div>
-                    <h3>${s.name}</h3>
-                    <p>${s.label}</p>
+                    <div class="connect-details">
+                        <h3>${s.name}</h3>
+                        <p>${s.label}</p>
+                    </div>
                 </a>`
             ).join("");
         });
@@ -136,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { hex: '#14b8a6', rgb: '20, 184, 166' }   // Teal
     ];
     let currentColorIndex = 0;
-    
+
     setInterval(() => {
         currentColorIndex = (currentColorIndex + 1) % accentColors.length;
         const color = accentColors[currentColorIndex];
@@ -146,37 +179,165 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 6. SCROLL ORBIT FOR HERO DOTS ---
     const dotsContainer = document.querySelector(".image-open-container");
+    let orbitRafId = null;
+
     if (dotsContainer) {
-        const dots = dotsContainer.querySelectorAll(".floating-dot");
+        const dots = dotsContainer.querySelectorAll(".floating-dot-wrapper");
         const baseAngles = [0, 120, 240];
-        
+
         const updateOrbit = () => {
             const scrollTop = window.scrollY;
-            // 1px of scroll = 0.2 degrees of rotation
             const rotation = scrollTop * 0.2;
-            
             const width = dotsContainer.clientWidth || 320;
             const height = dotsContainer.clientHeight || 380;
             const centerX = width / 2;
             const centerY = height / 2;
             const radius = width / 2 + 15; // 15px offset outside the container border
-            
+
             dots.forEach((dot, index) => {
                 if (index < 3) {
                     const angleDeg = baseAngles[index] + rotation;
                     const angleRad = (angleDeg * Math.PI) / 180;
-                    
+
                     const x = centerX + radius * Math.cos(angleRad) - 6; // Subtract 6px (half of 12px dot width) to center it
                     const y = centerY + radius * Math.sin(angleRad) - 6;
-                    
-                    dot.style.left = `${x}px`;
-                    dot.style.top = `${y}px`;
+
+                    dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
                 }
             });
         };
-        
-        window.addEventListener("scroll", updateOrbit, { passive: true });
-        window.addEventListener("resize", updateOrbit, { passive: true });
+
+        const handleOrbitScroll = () => {
+            if (orbitRafId) cancelAnimationFrame(orbitRafId);
+            orbitRafId = requestAnimationFrame(updateOrbit);
+        };
+
+        addEventListenerWithCleanup(window, "scroll", handleOrbitScroll, { passive: true });
+        addEventListenerWithCleanup(window, "resize", updateOrbit, { passive: true });
         updateOrbit(); // Initial position setup
     }
+
+    // --- 7. ACTIVE NAV LINK TRACKING ---
+    const navLinks = document.querySelectorAll(".nav-item[data-section]");
+    const sections = document.querySelectorAll("section[id]");
+
+    const updateActiveNav = throttle(() => {
+        let currentSection = null;
+        const scrollPosition = window.scrollY + 80; // Offset for header height
+
+        sections.forEach(section => {
+            if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
+                currentSection = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("data-section") === currentSection) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+        });
+
+        const indicatorDots = document.querySelectorAll(".indicator-dot[data-section]");
+        indicatorDots.forEach(dot => {
+            if (dot.getAttribute("data-section") === currentSection) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        });
+    }, 100);
+
+    addEventListenerWithCleanup(window, "scroll", updateActiveNav, { passive: true });
+    updateActiveNav(); // Initial call
+
+    // --- 8. CARD TILT EFFECT (3D Perspective) ---
+    const cards = document.querySelectorAll(".skill-card, .connect-card");
+
+    cards.forEach(card => {
+        const handleMouseMove = (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * 5;
+            const rotateY = ((centerX - x) / centerX) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        };
+
+        const handleMouseLeave = () => {
+            card.style.transform = "";
+        };
+
+        addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
+        addEventListenerWithCleanup(card, "mouseleave", handleMouseLeave, false);
+    });
+
+    // --- 9. CONNECT CARD RADIAL GRADIENT TRACKING ---
+    const connectCards = document.querySelectorAll(".connect-card");
+    connectCards.forEach(card => {
+        const handleMouseMove = (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+            card.style.setProperty("--mouse-x", `${x}%`);
+            card.style.setProperty("--mouse-y", `${y}%`);
+        };
+
+        const handleMouseLeave = () => {
+            card.style.setProperty("--mouse-x", "50%");
+            card.style.setProperty("--mouse-y", "50%");
+        };
+
+        addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
+        addEventListenerWithCleanup(card, "mouseleave", handleMouseLeave, false);
+    });
+
+    // --- 10. PARALLAX EFFECT FOR DECORATIVE ELEMENTS ---
+    const decorDots = document.querySelectorAll(".decor-dots");
+    let rafId = null;
+    const updateParallax = () => {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        
+        decorDots.forEach(dot => {
+            const parentSection = dot.closest("section");
+            if (!parentSection) return;
+            const sectionTop = parentSection.offsetTop;
+            const sectionHeight = parentSection.offsetHeight;
+            
+            // Adjust speed: dots-left moves a bit more than dots-right
+            const speed = dot.classList.contains("dots-left") ? 0.25 : 0.15;
+            
+            // Calculate how far the section center is from the viewport center
+            const sectionCenter = sectionTop + sectionHeight / 2;
+            const viewportCenter = scrollY + viewportHeight / 2;
+            const relativeScroll = viewportCenter - sectionCenter;
+            
+            // Hardware accelerated 3D transform relative to viewport position
+            dot.style.transform = `translate3d(0, ${relativeScroll * speed}px, 0)`;
+        });
+    };
+
+    const handleParallaxScroll = () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(updateParallax);
+    };
+
+    addEventListenerWithCleanup(window, "scroll", handleParallaxScroll, { passive: true });
+    addEventListenerWithCleanup(window, "resize", updateParallax, { passive: true });
+    updateParallax(); // Initial position setup
+
+    // Cleanup on page unload
+    window.addEventListener("beforeunload", () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        if (orbitRafId) cancelAnimationFrame(orbitRafId);
+        cleanup();
+    });
 });
