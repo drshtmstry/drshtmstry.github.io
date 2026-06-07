@@ -19,9 +19,9 @@
   --font-body: "Inter", sans-serif;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 10px 30px -10px rgba(0, 184, 124, 0.08);
+  --shadow-md: 0 10px 30px -10px rgba(var(--primary-rgb), 0.08);
   --shadow-lg: 0 20px 40px -15px rgba(20, 29, 42, 0.05);
-  --shadow-xl: 0 25px 50px -12px rgba(0, 184, 124, 0.15);
+  --shadow-xl: 0 25px 50px -12px rgba(var(--primary-rgb), 0.15);
 
   /* Transition variables */
   --transition-base: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -43,9 +43,41 @@
   --border-color: rgba(255, 255, 255, 0.06);
   --border-color-hover: rgba(255, 255, 255, 0.12);
 
-  --shadow-md: 0 10px 30px -10px rgba(0, 184, 124, 0.15);
+  --shadow-md: 0 10px 30px -10px rgba(var(--primary-rgb), 0.15);
   --shadow-lg: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
 }
+
+/* Static Section Colors (Scoped locally for optimized scroll performance) */
+#about {
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-rgb: 59, 130, 246;
+}
+
+#skills {
+  --primary: #ec4899;
+  --primary-hover: #db2777;
+  --primary-rgb: 236, 72, 153;
+}
+
+#resume {
+  --primary: #14b8a6;
+  --primary-hover: #0d9488;
+  --primary-rgb: 20, 184, 166;
+}
+
+#portfolio {
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --primary-rgb: 139, 92, 246;
+}
+
+#contact {
+  --primary: #00b87c;
+  --primary-hover: #009665;
+  --primary-rgb: 0, 184, 124;
+}
+
 
 /* Dark Theme Visibility Adjustments */
 [data-theme="dark"] .decor-dots {

@@ -167,14 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderSocials();
 
-    const sectionColors = {
-        about: { hex: '#3b82f6', rgb: '59, 130, 246' },      // Electric Blue (1st)
-        skills: { hex: '#ec4899', rgb: '236, 72, 153' },     // Pink
-        resume: { hex: '#14b8a6', rgb: '20, 184, 166' },     // Teal
-        portfolio: { hex: '#8b5cf6', rgb: '139, 92, 246' },  // Purple (Projects)
-        contact: { hex: '#00b87c', rgb: '0, 184, 124' }      // Emerald
-    };
-
     // --- 6. SCROLL ORBIT FOR HERO DOTS ---
     const dotsContainer = document.querySelector(".image-open-container");
     let orbitRafId = null;
@@ -229,11 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        if (currentSection && sectionColors[currentSection]) {
-            const color = sectionColors[currentSection];
-            docElement.style.setProperty('--primary', color.hex);
-            docElement.style.setProperty('--primary-rgb', color.rgb);
-        }
 
         navLinks.forEach(link => {
             if (link.getAttribute("data-section") === currentSection) {
