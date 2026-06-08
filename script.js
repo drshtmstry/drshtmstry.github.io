@@ -104,8 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                if (window.innerWidth <= 768) {
+                    obs.unobserve(entry.target);
+                }
             } else {
-                entry.target.classList.remove('active');
+                if (window.innerWidth > 768) {
+                    entry.target.classList.remove('active');
+                }
             }
         });
     }, {
@@ -146,22 +151,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderSocials = () => {
         // Vertical sidebar only: icon-only links
         document.querySelectorAll('[data-socials="vertical"]').forEach(container => {
-            container.innerHTML = SOCIALS.map(s =>
-                `<a href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="${s.name}"><i class="${s.icon}"></i></a>`
-            ).join("");
+            if (container.children.length === 0) {
+                container.innerHTML = SOCIALS.map(s =>
+                    `<a href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="${s.name}"><i class="${s.icon}"></i></a>`
+                ).join("");
+            }
         });
 
         // Contact section: full cards
         document.querySelectorAll('[data-socials="contact"]').forEach(container => {
-            container.innerHTML = SOCIALS.map(s =>
-                `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="connect-card">
-                    <div class="connect-icon"><i class="${s.icon}"></i></div>
-                    <div class="connect-details">
-                        <h3>${s.name}</h3>
-                        <p>${s.label}</p>
-                    </div>
-                </a>`
-            ).join("");
+            if (container.children.length === 0) {
+                container.innerHTML = SOCIALS.map(s =>
+                    `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="connect-card">
+                        <div class="connect-icon"><i class="${s.icon}"></i></div>
+                        <div class="connect-details">
+                            <h3>${s.name}</h3>
+                            <p>${s.label}</p>
+                        </div>
+                    </a>`
+                ).join("");
+            }
         });
     };
 
