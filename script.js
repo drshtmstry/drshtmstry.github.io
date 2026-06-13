@@ -94,6 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
         addEventListenerWithCleanup(item, "click", handleNavClick);
     });
 
+    // Close drawer when touching/clicking outside
+    const handleOutsideClick = (event) => {
+        if (mobileDrawer && mobileDrawer.classList.contains("open")) {
+            // Check if the click target is outside mobileDrawer and not on menuToggle
+            if (!mobileDrawer.contains(event.target) && (!menuToggle || !menuToggle.contains(event.target))) {
+                mobileDrawer.classList.remove("open");
+            }
+        }
+    };
+    addEventListenerWithCleanup(document, "click", handleOutsideClick);
+
     // --- 3. SCROLL REVEAL ANIMATION ---
 
     const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
