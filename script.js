@@ -53,12 +53,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Theme toggle click listener (covers theme-toggle-btn and mobile-theme-toggle)
+    let themeTransitionTimeout = null;
     const handleThemeToggle = (event) => {
         const button = event.target.closest("#theme-toggle, #mobile-theme-toggle");
         if (button) {
             event.preventDefault();
             const newTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+            
+            if (themeTransitionTimeout) {
+                clearTimeout(themeTransitionTimeout);
+            }
+            
+            docElement.classList.add("theme-transitioning");
             setTheme(newTheme);
+            
+            themeTransitionTimeout = setTimeout(() => {
+                docElement.classList.remove("theme-transitioning");
+                themeTransitionTimeout = null;
+            }, 300); // Matches --transition-base duration (0.3s)
         }
     };
     addEventListenerWithCleanup(document, "click", handleThemeToggle);

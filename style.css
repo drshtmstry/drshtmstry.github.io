@@ -174,6 +174,11 @@ body {
   transition: none !important;
 }
 
+.theme-transitioning,
+.theme-transitioning * {
+  transition-delay: 0s !important;
+}
+
 /* Override reveal styles during programmatic smooth scroll to prevent white blanks and layout shifts */
 html.nav-scrolling .reveal > *:not(.decor-dots),
 html.nav-scrolling .reveal-left,
