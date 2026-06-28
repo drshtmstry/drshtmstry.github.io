@@ -132,6 +132,42 @@ html {
   }
 }
 
+/* Optimize height for smaller desktop screens to prevent scroll-snap "double keypress" jank */
+@media (min-width: 769px) and (max-height: 900px) {
+  .portfolio-section {
+    padding: 20px 0 !important;
+  }
+  .portfolio-section .section-header {
+    margin-bottom: 12px !important;
+  }
+  .portfolio-section .section-header h2 {
+    font-size: 2.2rem !important;
+    margin-bottom: 12px !important;
+  }
+  .projects-container {
+    gap: 12px !important;
+  }
+  .project-card-figma {
+    padding: 16px 20px !important;
+  }
+  .project-text {
+    margin-bottom: 8px !important;
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* Disable scroll snapping on mobile, tablet, and touch screens */
+@media (max-width: 768px), (pointer: coarse), (hover: none) {
+  html {
+    scroll-snap-type: none !important;
+    scroll-behavior: smooth !important;
+  }
+  section {
+    scroll-snap-align: none !important;
+  }
+}
+
 @media (min-width: 769px) {
   .skills-section,
   .resume-section,
@@ -1956,10 +1992,14 @@ html.nav-scrolling .reveal-stagger > * {
     justify-content: center;
   }
 
-  /* Simplify directional reveals on mobile */
+  /* Simplify directional reveals and make them faster on mobile */
   .reveal-left,
   .reveal-right {
     transform: translateY(32px);
+    transition:
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
   .reveal-left.active,
   .reveal-right.active {
@@ -2077,6 +2117,24 @@ html.nav-scrolling .reveal-stagger > * {
     margin-bottom: 32px !important;
   }
 
+  /* Make sure header and grid gaps are consistent across sections on mobile */
+  .skills-grid {
+    gap: 32px !important;
+  }
+  .skills-header.section-header {
+    margin-bottom: 0 !important;
+  }
+  .skills-header p {
+    margin-bottom: 0 !important;
+  }
+
+  .contact-grid-wrapper {
+    gap: 32px !important;
+  }
+  .contact-info-side.section-header {
+    margin-bottom: 0 !important;
+  }
+
   /* Make sure header text doesn't overflow or wrap awkwardly on mobile */
   .section-header h2 {
     font-size: 1.85rem !important;
@@ -2084,9 +2142,23 @@ html.nav-scrolling .reveal-stagger > * {
     margin-bottom: 12px !important;
   }
 
-  /* Slide up from bottom on mobile instead of left to right */
+  /* Slide up from bottom on mobile instead of left to right, and make them faster */
   .section-header > * {
     transform: translate3d(0, 20px, 0) !important;
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Reduce staggered animation delays on mobile */
+  .section-header > *:nth-child(1) {
+    transition-delay: 0.05s !important;
+  }
+  .section-header > *:nth-child(2) {
+    transition-delay: 0.12s !important;
+  }
+  .section-header > *:nth-child(3) {
+    transition-delay: 0.2s !important;
   }
 
   .skills-section.active .section-header > *,
@@ -2095,6 +2167,24 @@ html.nav-scrolling .reveal-stagger > * {
   .contact-section.active .section-header > * {
     transform: translate3d(0, 0, 0) !important;
   }
+
+  /* Speed up general section reveals and staggers on mobile */
+  .reveal > *:not(.decor-dots) {
+    transition:
+      opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .reveal-stagger > * {
+    transition:
+      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+  .reveal-stagger.active > *:nth-child(1) { transition-delay: 0s !important; }
+  .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.08s !important; }
+  .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.16s !important; }
+  .reveal-stagger.active > *:nth-child(4) { transition-delay: 0.24s !important; }
 
   /* Disable heading wobble animation on mobile screens */
   .skills-section.active h2,
