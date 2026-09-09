@@ -6,14 +6,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let navTargetSectionId = null;
     let activeScrollCleanup = null;
 
-    // --- UTILITY: THROTTLE FUNCTION ---
+    // --- UTILITY: THROTTLE FUNCTION (with guaranteed trailing call) ---
     const throttle = (func, limit) => {
-        let inThrottle;
+        let inThrottle = false;
+        let lastArgs = null;
+        let lastThis = null;
+        let timer = null;
+
         return function (...args) {
             if (!inThrottle) {
                 func.apply(this, args);
                 inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+                timer = setTimeout(() => {
+                    inThrottle = false;
+                    if (lastArgs) {
+                        func.apply(lastThis, lastArgs);
+                        lastArgs = null;
+                        lastThis = null;
+                    }
+                }, limit);
+            } else {
+                lastArgs = args;
+                lastThis = this;
             }
         };
     };
@@ -273,10 +287,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 dot.classList.remove("active");
             }
         });
-    }, 100);
+    }, 50);
+
+    // Floating Navbar Morph (evaluated instantaneously on every frame so it never gets stuck)
+    const navbar = document.querySelector(".navbar");
+    let navScrollTicking = false;
+    const handleNavbarScroll = () => {
+        if (!navScrollTicking) {
+            navScrollTicking = true;
+            requestAnimationFrame(() => {
+                if (navbar) {
+                    if (window.scrollY > 20) {
+                        navbar.classList.add("scrolled");
+                    } else {
+                        navbar.classList.remove("scrolled");
+                    }
+                }
+                navScrollTicking = false;
+            });
+        }
+    };
 
     addEventListenerWithCleanup(window, "scroll", updateActiveNav, { passive: true });
+    addEventListenerWithCleanup(window, "scroll", handleNavbarScroll, { passive: true });
     updateActiveNav(); // Initial call
+    handleNavbarScroll();
 
 
 

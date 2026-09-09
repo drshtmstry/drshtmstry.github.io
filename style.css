@@ -240,8 +240,8 @@ html.nav-scrolling .reveal-stagger>* {
 
 .reveal>*:not(.decor-dots) {
   opacity: 0;
-  transform: translateY(50px) scale(0.97);
-  filter: blur(6px);
+  transform: translateY(40px) scale(0.96);
+  filter: blur(4px);
   transition:
     opacity var(--transition-slower),
     transform var(--transition-slower),
@@ -254,6 +254,7 @@ html.nav-scrolling .reveal-stagger>* {
   transform: translateY(0) scale(1);
   filter: blur(0);
 }
+
 
 /* Staggered reveal delays for direct children */
 .reveal-stagger>* {
@@ -381,25 +382,72 @@ html.nav-scrolling .reveal-stagger>* {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(var(--bg-primary), 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(var(--bg-primary), 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   height: 64px;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate3d(0, 0, 0);
   transition:
-    background-color var(--transition-base),
-    border-color var(--transition-base);
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-bottom-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+[data-theme="dark"] .navbar {
+  background: rgba(8, 12, 20, 0.85);
 }
 
 .nav-container {
   max-width: 1200px;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   padding: 0 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: 0 0 0 transparent;
+  transition:
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Morph into floating bar ONLY when scrolling starts (exact same width, height, and content spacing) */
+.navbar.scrolled {
+  transform: translate3d(0, 12px, 0);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
+  pointer-events: none; /* Let outside clicks pass through */
+}
+
+.navbar.scrolled .nav-container {
+  padding: 0 40px; /* Kept strictly at 40px so links & logo spacing do not shift */
+  background: rgba(var(--bg-card), 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-color: rgba(128, 128, 128, 0.14); /* Ultra-soft glass border, no harsh contrast */
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+}
+
+[data-theme="dark"] .navbar.scrolled .nav-container {
+  background: rgba(15, 22, 36, 0.88);
+  border-color: rgba(255, 255, 255, 0.08); /* Soft dark mode border */
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
 .logo {
@@ -440,7 +488,7 @@ html.nav-scrolling .reveal-stagger>* {
   font-weight: 600;
   font-size: 0.95rem;
   position: relative;
-  transition: color var(--transition-base);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: color;
 }
 
@@ -455,8 +503,10 @@ html.nav-scrolling .reveal-stagger>* {
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform var(--transition-base);
-  will-change: transform;
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, background-color;
 }
 
 .nav-item::before {
@@ -466,7 +516,9 @@ html.nav-scrolling .reveal-stagger>* {
   background: rgba(var(--primary-rgb), 0.05);
   border-radius: 6px;
   opacity: 0;
-  transition: opacity var(--transition-base);
+  transition:
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: -1;
 }
 
@@ -2071,7 +2123,8 @@ html.nav-scrolling .reveal-stagger>* {
     padding: 0 16px;
   }
 
-  .nav-container {
+  .nav-container,
+  .navbar.scrolled .nav-container {
     padding: 0 16px;
   }
 
