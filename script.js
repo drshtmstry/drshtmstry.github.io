@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const revealSelectors = '.reveal, .reveal-left, .reveal-right, .reveal-stagger';
 
+    const isMobile = window.innerWidth <= 768;
     const observer = new IntersectionObserver((entries, obs) => {
         if (isNavScrolling) return; // Ignore observer during programmatic nav scrolls
         
@@ -137,7 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.05,
+        // On mobile: trigger reveal when heading/section reaches past 20% into viewport
+        rootMargin: isMobile ? "0px 0px -20% 0px" : "0px 0px -50px 0px"
     });
 
     document.querySelectorAll(revealSelectors).forEach(el => observer.observe(el));
