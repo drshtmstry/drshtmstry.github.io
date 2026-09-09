@@ -278,42 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     addEventListenerWithCleanup(window, "scroll", updateActiveNav, { passive: true });
     updateActiveNav(); // Initial call
 
-    // --- 8. CARD TILT EFFECT (3D Perspective) + CONNECT CARD RADIAL GRADIENT ---
-    const cards = document.querySelectorAll(".skill-card, .connect-card");
 
-    cards.forEach(card => {
-        const isConnectCard = card.classList.contains("connect-card");
-
-        const handleMouseMove = (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / centerY) * 5;
-            const rotateY = ((centerX - x) / centerX) * 5;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-            if (isConnectCard) {
-                card.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
-                card.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
-            }
-        };
-
-        const handleMouseLeave = () => {
-            card.style.transform = "";
-            if (isConnectCard) {
-                card.style.setProperty("--mouse-x", "50%");
-                card.style.setProperty("--mouse-y", "50%");
-            }
-        };
-
-        addEventListenerWithCleanup(card, "mousemove", handleMouseMove, false);
-        addEventListenerWithCleanup(card, "mouseleave", handleMouseLeave, false);
-    });
 
     // --- 9. SMOOTH SCROLL FOR INTERNALS & ANIMATION SYNC ---
     const handleAnchorClick = (event) => {

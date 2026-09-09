@@ -84,16 +84,15 @@
 }
 
 [data-theme="dark"] .bg-gradient-circle {
-  background: radial-gradient(
-    circle,
-    rgba(var(--primary-rgb), 0.45) 0%,
-    rgba(var(--primary-rgb), 0.1) 60%,
-    transparent 80%
-  );
+  background: radial-gradient(circle,
+      rgba(var(--primary-rgb), 0.45) 0%,
+      rgba(var(--primary-rgb), 0.1) 60%,
+      transparent 80%);
 }
 
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -127,6 +126,7 @@ html {
   html {
     scroll-snap-type: y mandatory;
   }
+
   section {
     scroll-snap-align: start;
     scroll-snap-stop: normal;
@@ -138,19 +138,24 @@ html {
   .portfolio-section {
     padding: 20px 0 !important;
   }
+
   .portfolio-section .section-header {
     margin-bottom: 12px !important;
   }
+
   .portfolio-section .section-header h2 {
     font-size: 2.2rem !important;
     margin-bottom: 12px !important;
   }
+
   .projects-container {
     gap: 12px !important;
   }
+
   .project-card-figma {
     padding: 16px 20px !important;
   }
+
   .project-text {
     margin-bottom: 8px !important;
     font-size: 0.85rem !important;
@@ -159,17 +164,21 @@ html {
 }
 
 /* Disable scroll snapping on mobile, tablet, and touch screens */
-@media (max-width: 768px), (pointer: coarse), (hover: none) {
+@media (max-width: 768px),
+(pointer: coarse),
+(hover: none) {
   html {
     scroll-snap-type: none !important;
     scroll-behavior: smooth !important;
   }
+
   section {
     scroll-snap-align: none !important;
   }
 }
 
 @media (min-width: 769px) {
+
   .skills-section,
   .resume-section,
   .portfolio-section {
@@ -179,15 +188,17 @@ html {
     justify-content: center;
     padding: 60px 0;
   }
+
   .contact-section {
-    min-height: calc(
-      100dvh - 126px
-    ); /* Fits contact + footer in one viewport */
+    min-height: calc(100dvh - 126px);
+    /* Fits contact + footer in one viewport */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 0 30px; /* Reduced bottom padding */
+    padding: 60px 0 30px;
+    /* Reduced bottom padding */
   }
+
   .portfolio-section {
     padding: 30px 0;
   }
@@ -217,17 +228,17 @@ body {
 }
 
 /* Override reveal styles during programmatic smooth scroll to prevent white blanks and layout shifts */
-html.nav-scrolling .reveal > *:not(.decor-dots),
+html.nav-scrolling .reveal>*:not(.decor-dots),
 html.nav-scrolling .reveal-left,
 html.nav-scrolling .reveal-right,
-html.nav-scrolling .reveal-stagger > * {
+html.nav-scrolling .reveal-stagger>* {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;
   transition: none !important;
 }
 
-.reveal > *:not(.decor-dots) {
+.reveal>*:not(.decor-dots) {
   opacity: 0;
   transform: translateY(50px) scale(0.97);
   filter: blur(6px);
@@ -238,14 +249,14 @@ html.nav-scrolling .reveal-stagger > * {
   will-change: opacity, transform, filter;
 }
 
-.reveal.active > *:not(.decor-dots) {
+.reveal.active>*:not(.decor-dots) {
   opacity: 1;
   transform: translateY(0) scale(1);
   filter: blur(0);
 }
 
 /* Staggered reveal delays for direct children */
-.reveal-stagger > * {
+.reveal-stagger>* {
   opacity: 0;
   transform: translateY(32px);
   transition:
@@ -253,25 +264,29 @@ html.nav-scrolling .reveal-stagger > * {
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
-.reveal-stagger.active > *:nth-child(1) {
+
+.reveal-stagger.active>*:nth-child(1) {
   opacity: 1;
   transform: none;
   transition-delay: 0s;
   animation-delay: 0s;
 }
-.reveal-stagger.active > *:nth-child(2) {
+
+.reveal-stagger.active>*:nth-child(2) {
   opacity: 1;
   transform: none;
   transition-delay: 0.1s;
   animation-delay: 0.1s;
 }
-.reveal-stagger.active > *:nth-child(3) {
+
+.reveal-stagger.active>*:nth-child(3) {
   opacity: 1;
   transform: none;
   transition-delay: 0.2s;
   animation-delay: 0.2s;
 }
-.reveal-stagger.active > *:nth-child(4) {
+
+.reveal-stagger.active>*:nth-child(4) {
   opacity: 1;
   transform: none;
   transition-delay: 0.3s;
@@ -289,6 +304,7 @@ html.nav-scrolling .reveal-stagger > * {
     filter 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform, filter;
 }
+
 .reveal-left.active {
   opacity: 1;
   transform: translateX(0);
@@ -307,6 +323,7 @@ html.nav-scrolling .reveal-stagger > * {
   transition-delay: 0.15s;
   will-change: opacity, transform, filter;
 }
+
 .reveal-right.active {
   opacity: 1;
   transform: translateX(0);
@@ -477,9 +494,11 @@ html.nav-scrolling .reveal-stagger > * {
 .mobile-nav-item[data-section="about"].active {
   color: #3b82f6 !important;
 }
+
 .nav-item[data-section="about"]::after {
   background: #3b82f6 !important;
 }
+
 .nav-item[data-section="about"]::before {
   background: rgba(59, 130, 246, 0.08) !important;
 }
@@ -490,9 +509,11 @@ html.nav-scrolling .reveal-stagger > * {
 .mobile-nav-item[data-section="skills"].active {
   color: #ec4899 !important;
 }
+
 .nav-item[data-section="skills"]::after {
   background: #ec4899 !important;
 }
+
 .nav-item[data-section="skills"]::before {
   background: rgba(236, 72, 153, 0.08) !important;
 }
@@ -503,9 +524,11 @@ html.nav-scrolling .reveal-stagger > * {
 .mobile-nav-item[data-section="resume"].active {
   color: #14b8a6 !important;
 }
+
 .nav-item[data-section="resume"]::after {
   background: #14b8a6 !important;
 }
+
 .nav-item[data-section="resume"]::before {
   background: rgba(20, 184, 166, 0.08) !important;
 }
@@ -516,9 +539,11 @@ html.nav-scrolling .reveal-stagger > * {
 .mobile-nav-item[data-section="portfolio"].active {
   color: #8b5cf6 !important;
 }
+
 .nav-item[data-section="portfolio"]::after {
   background: #8b5cf6 !important;
 }
+
 .nav-item[data-section="portfolio"]::before {
   background: rgba(139, 92, 246, 0.08) !important;
 }
@@ -529,9 +554,11 @@ html.nav-scrolling .reveal-stagger > * {
 .mobile-nav-item[data-section="contact"].active {
   color: #00b87c !important;
 }
+
 .nav-item[data-section="contact"]::after {
   background: #00b87c !important;
 }
+
 .nav-item[data-section="contact"]::before {
   background: rgba(0, 184, 124, 0.08) !important;
 }
@@ -633,6 +660,7 @@ html.nav-scrolling .reveal-stagger > * {
     height: 0;
     opacity: 1;
   }
+
   100% {
     width: 300px;
     height: 300px;
@@ -740,7 +768,88 @@ html.nav-scrolling .reveal-stagger > * {
 .hero-buttons {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
+}
+
+.hero-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.08);
+  border: none;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  text-decoration: none;
+  box-shadow: none;
+  transition: all var(--transition-base);
+  will-change: transform, box-shadow, color, background-color;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-icon-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb), 0.12);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.hero-icon-btn:hover {
+  transform: translate3d(0, -4px, 0) scale(1.06);
+}
+
+.hero-icon-btn:hover::before {
+  opacity: 1;
+}
+
+.hero-icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* LinkedIn Brand Colors */
+.hero-icon-btn.btn-linkedin {
+  background: rgba(10, 102, 194, 0.1);
+  color: #0a66c2;
+}
+[data-theme="dark"] .hero-icon-btn.btn-linkedin {
+  background: rgba(56, 151, 240, 0.15);
+  color: #38bdf8;
+}
+.hero-icon-btn.btn-linkedin:hover {
+  background: #0a66c2;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(10, 102, 194, 0.4);
+}
+[data-theme="dark"] .hero-icon-btn.btn-linkedin:hover {
+  background: #0a66c2;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+}
+
+/* GitHub Brand Colors */
+.hero-icon-btn.btn-github {
+  background: rgba(36, 41, 47, 0.08);
+  color: #24292f;
+}
+[data-theme="dark"] .hero-icon-btn.btn-github {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f6fc;
+}
+.hero-icon-btn.btn-github:hover {
+  background: #24292f;
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(36, 41, 47, 0.35);
+}
+[data-theme="dark"] .hero-icon-btn.btn-github:hover {
+  background: #238636; /* GitHub's signature bright accent green on dark theme */
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(35, 134, 54, 0.45);
 }
 
 /* HERO MEDIA OFFSET FRAME (FIGMA REDESIGN) */
@@ -769,12 +878,10 @@ html.nav-scrolling .reveal-stagger > * {
   width: 95%;
   height: 95%;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(var(--primary-rgb), 0.25) 0%,
-    rgba(var(--primary-rgb), 0.03) 70%,
-    transparent 100%
-  );
+  background: radial-gradient(circle,
+      rgba(var(--primary-rgb), 0.25) 0%,
+      rgba(var(--primary-rgb), 0.03) 70%,
+      transparent 100%);
   z-index: 1;
   animation: pulse-glow 4s ease-in-out infinite alternate;
   transition: background 0.8s ease;
@@ -786,6 +893,7 @@ html.nav-scrolling .reveal-stagger > * {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0.8;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(1.12);
     opacity: 1;
@@ -798,10 +906,12 @@ html.nav-scrolling .reveal-stagger > * {
     opacity: 0;
     transform: translateY(40px) scale(0.8);
   }
+
   50% {
     opacity: 1;
     transform: translateY(-5px) scale(1.02);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -813,6 +923,7 @@ html.nav-scrolling .reveal-stagger > * {
     opacity: 0;
     transform: translateY(60px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -824,6 +935,7 @@ html.nav-scrolling .reveal-stagger > * {
     opacity: 0;
     transform: translateY(20px) translateX(0);
   }
+
   100% {
     opacity: 1;
     transform: translateY(-10px) translateX(0);
@@ -835,6 +947,7 @@ html.nav-scrolling .reveal-stagger > * {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -970,9 +1083,11 @@ html.nav-scrolling .reveal-stagger > * {
 .dot-blue {
   background-color: #3b82f6;
 }
+
 .dot-green {
   background-color: #10b981;
 }
+
 .dot-red {
   background-color: #ef4444;
 }
@@ -981,6 +1096,7 @@ html.nav-scrolling .reveal-stagger > * {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(0, -12px, 0);
   }
@@ -1038,12 +1154,10 @@ html.nav-scrolling .reveal-stagger > * {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
   transition: left var(--transition-base);
 }
 
@@ -1061,14 +1175,17 @@ html.nav-scrolling .reveal-stagger > * {
   transition-delay: 0.3s;
   animation-delay: 0.3s;
 }
+
 .skills-section.active .skill-card:nth-child(2) {
   transition-delay: 0.42s;
   animation-delay: 0.42s;
 }
+
 .skills-section.active .skill-card:nth-child(3) {
   transition-delay: 0.54s;
   animation-delay: 0.54s;
 }
+
 .skills-section.active .skill-card:nth-child(4) {
   transition-delay: 0.66s;
   animation-delay: 0.66s;
@@ -1163,12 +1280,15 @@ html.nav-scrolling .reveal-stagger > * {
 .portfolio-section.active .project-card-figma:nth-child(1) {
   transition-delay: 0.3s;
 }
+
 .portfolio-section.active .project-card-figma:nth-child(2) {
   transition-delay: 0.42s;
 }
+
 .portfolio-section.active .project-card-figma:nth-child(3) {
   transition-delay: 0.54s;
 }
+
 .portfolio-section.active .project-card-figma:nth-child(4) {
   transition-delay: 0.66s;
 }
@@ -1359,6 +1479,7 @@ html.nav-scrolling .reveal-stagger > * {
 .contact-section.active .connect-card:nth-child(1) {
   transition-delay: 0.48s;
 }
+
 .contact-section.active .connect-card:nth-child(2) {
   transition-delay: 0.62s;
 }
@@ -1368,27 +1489,6 @@ html.nav-scrolling .reveal-stagger > * {
   border-color: var(--primary);
   box-shadow: var(--shadow-md);
   transition-delay: 0s !important;
-}
-
-.connect-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(
-    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(var(--primary-rgb), 0.08),
-    transparent 70%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-base);
-}
-
-.connect-card:hover::after {
-  opacity: 1;
 }
 
 .connect-icon {
@@ -1623,6 +1723,7 @@ html.nav-scrolling .reveal-stagger > * {
 .resume-section.active .resume-column-card:nth-child(1) {
   transition-delay: 0.3s;
 }
+
 .resume-section.active .resume-column-card:nth-child(2) {
   transition-delay: 0.45s;
 }
@@ -1682,6 +1783,7 @@ html.nav-scrolling .reveal-stagger > * {
     opacity: 0;
     transform: translateY(-24px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -1697,12 +1799,15 @@ html.nav-scrolling .reveal-stagger > * {
 .resume-section.active .timeline-block:nth-child(1) {
   animation-delay: 0.45s;
 }
+
 .resume-section.active .timeline-block:nth-child(2) {
   animation-delay: 0.58s;
 }
+
 .resume-section.active .timeline-block:nth-child(3) {
   animation-delay: 0.7s;
 }
+
 .resume-section.active .timeline-block:nth-child(4) {
   animation-delay: 0.82s;
 }
@@ -1797,7 +1902,7 @@ html.nav-scrolling .reveal-stagger > * {
 }
 
 /* SECTION APPEARING HEADINGS ANIMATIONS (UNIFIED STAGGERED ENTRANCE) */
-.section-header > * {
+.section-header>* {
   opacity: 0;
   transform: translate3d(-30px, 0, 0);
   transition:
@@ -1807,21 +1912,23 @@ html.nav-scrolling .reveal-stagger > * {
 }
 
 /* Staggered transition delays for children */
-.section-header > *:nth-child(1) {
+.section-header>*:nth-child(1) {
   transition-delay: 0.1s;
 }
-.section-header > *:nth-child(2) {
+
+.section-header>*:nth-child(2) {
   transition-delay: 0.22s;
 }
-.section-header > *:nth-child(3) {
+
+.section-header>*:nth-child(3) {
   transition-delay: 0.35s;
 }
 
 /* Activate reveal states when parent section is active */
-.skills-section.active .section-header > *,
-.resume-section.active .section-header > *,
-.portfolio-section.active .section-header > *,
-.contact-section.active .section-header > * {
+.skills-section.active .section-header>*,
+.resume-section.active .section-header>*,
+.portfolio-section.active .section-header>*,
+.contact-section.active .section-header>* {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
@@ -1831,6 +1938,7 @@ html.nav-scrolling .reveal-stagger > * {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(8px, 0, 0);
   }
@@ -1943,9 +2051,11 @@ html.nav-scrolling .reveal-stagger > * {
   .hero-title {
     font-size: 2.8rem;
   }
+
   .hero-grid {
     gap: 40px;
   }
+
   .skills-grid {
     grid-template-columns: 1fr;
     gap: 48px;
@@ -2002,6 +2112,7 @@ html.nav-scrolling .reveal-stagger > * {
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       filter 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
+
   .reveal-left.active,
   .reveal-right.active {
     transform: translateY(0);
@@ -2055,7 +2166,8 @@ html.nav-scrolling .reveal-stagger > * {
   }
 
   .hero-media {
-    order: -1; /* Image first on mobile */
+    order: -1;
+    /* Image first on mobile */
   }
 
   .image-open-container {
@@ -2122,9 +2234,11 @@ html.nav-scrolling .reveal-stagger > * {
   .skills-grid {
     gap: 32px !important;
   }
+
   .skills-header.section-header {
     margin-bottom: 0 !important;
   }
+
   .skills-header p {
     margin-bottom: 0 !important;
   }
@@ -2132,6 +2246,7 @@ html.nav-scrolling .reveal-stagger > * {
   .contact-grid-wrapper {
     gap: 32px !important;
   }
+
   .contact-info-side.section-header {
     margin-bottom: 0 !important;
   }
@@ -2144,7 +2259,7 @@ html.nav-scrolling .reveal-stagger > * {
   }
 
   /* Slide up from bottom on mobile instead of left to right, and make them faster */
-  .section-header > * {
+  .section-header>* {
     transform: translate3d(0, 20px, 0) !important;
     transition:
       opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2152,40 +2267,54 @@ html.nav-scrolling .reveal-stagger > * {
   }
 
   /* Reduce staggered animation delays on mobile */
-  .section-header > *:nth-child(1) {
+  .section-header>*:nth-child(1) {
     transition-delay: 0.05s !important;
   }
-  .section-header > *:nth-child(2) {
+
+  .section-header>*:nth-child(2) {
     transition-delay: 0.12s !important;
   }
-  .section-header > *:nth-child(3) {
+
+  .section-header>*:nth-child(3) {
     transition-delay: 0.2s !important;
   }
 
-  .skills-section.active .section-header > *,
-  .resume-section.active .section-header > *,
-  .portfolio-section.active .section-header > *,
-  .contact-section.active .section-header > * {
+  .skills-section.active .section-header>*,
+  .resume-section.active .section-header>*,
+  .portfolio-section.active .section-header>*,
+  .contact-section.active .section-header>* {
     transform: translate3d(0, 0, 0) !important;
   }
 
   /* Speed up general section reveals and staggers on mobile */
-  .reveal > *:not(.decor-dots) {
+  .reveal>*:not(.decor-dots) {
     transition:
       opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
       filter 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  .reveal-stagger > * {
+  .reveal-stagger>* {
     transition:
       opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
-  .reveal-stagger.active > *:nth-child(1) { transition-delay: 0s !important; }
-  .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.08s !important; }
-  .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.16s !important; }
-  .reveal-stagger.active > *:nth-child(4) { transition-delay: 0.24s !important; }
+
+  .reveal-stagger.active>*:nth-child(1) {
+    transition-delay: 0s !important;
+  }
+
+  .reveal-stagger.active>*:nth-child(2) {
+    transition-delay: 0.08s !important;
+  }
+
+  .reveal-stagger.active>*:nth-child(3) {
+    transition-delay: 0.16s !important;
+  }
+
+  .reveal-stagger.active>*:nth-child(4) {
+    transition-delay: 0.24s !important;
+  }
 
   /* Disable heading wobble animation on mobile screens */
   .skills-section.active h2,
