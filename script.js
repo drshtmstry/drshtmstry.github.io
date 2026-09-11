@@ -216,6 +216,189 @@ document.addEventListener("DOMContentLoaded", () => {
 
     renderSocials();
 
+    // --- 5B. PROJECTS HORIZONTAL CAROUSEL ---
+    const carouselSection = document.querySelector("#portfolio");
+    if (carouselSection) {
+        const container = carouselSection.querySelector(".projects-container");
+        const prevBtn = carouselSection.querySelector(".prev-btn");
+        const nextBtn = carouselSection.querySelector(".next-btn");
+        const pagination = carouselSection.querySelector(".carousel-pagination");
+        const cards = carouselSection.querySelectorAll(".project-card-figma");
+
+        if (container && cards.length > 0) {
+            const getVisibleCardCount = () => {
+                const containerWidth = container.clientWidth;
+                const firstCard = cards[0];
+                const cardWidth = firstCard ? firstCard.offsetWidth : 300;
+                return Math.max(1, Math.round(containerWidth / cardWidth));
+            };
+
+            const getPageCount = () => {
+                const visibleCards = getVisibleCardCount();
+                return Math.max(1, cards.length - visibleCards + 1);
+            };
+
+            const buildPagination = () => {
+                if (!pagination) return;
+                pagination.innerHTML = "";
+                const pageCount = getPageCount();
+
+                for (let idx = 0; idx < pageCount; idx++) {
+                    const dot = document.createElement("button");
+                    dot.className = `carousel-dot ${idx === 0 ? "active" : ""}`;
+                    dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
+                    dot.addEventListener("click", () => {
+                        const targetCard = cards[idx];
+                        if (targetCard) {
+                            const cardLeft = targetCard.offsetLeft - container.offsetLeft;
+                            container.scrollTo({ left: cardLeft, behavior: "smooth" });
+                        }
+                    });
+                    pagination.appendChild(dot);
+                }
+            };
+
+            buildPagination();
+
+            const updateNavState = () => {
+                const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                const currentScroll = container.scrollLeft;
+
+                if (prevBtn) {
+                    prevBtn.disabled = currentScroll <= 4;
+                }
+                if (nextBtn) {
+                    nextBtn.disabled = currentScroll >= maxScrollLeft - 4;
+                }
+
+                if (pagination) {
+                    const dots = pagination.querySelectorAll(".carousel-dot");
+                    if (dots.length === 0) return;
+
+                    let activeIndex = 0;
+                    if (maxScrollLeft > 0) {
+                        // If we are at or near the very end of scroll, activate the last dot
+                        if (currentScroll >= maxScrollLeft - 8) {
+                            activeIndex = dots.length - 1;
+                        } else if (currentScroll <= 8) {
+                            activeIndex = 0;
+                        } else {
+                            // Proportional scroll position
+                            const progress = Math.min(1, Math.max(0, currentScroll / maxScrollLeft));
+                            activeIndex = Math.round(progress * (dots.length - 1));
+                        }
+                    }
+
+                    dots.forEach((dot, idx) => {
+                        if (idx === activeIndex) {
+                            dot.classList.add("active");
+                        } else {
+                            dot.classList.remove("active");
+                        }
+                    });
+                }
+            };
+
+            const getCardStep = () => {
+                if (cards.length > 1) {
+                    return cards[1].offsetLeft - cards[0].offsetLeft;
+                }
+                return (cards[0] ? cards[0].offsetWidth : 300) + 20;
+            };
+
+            const scrollByPage = (direction) => {
+                const step = getCardStep();
+                const current = container.scrollLeft;
+                const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                let target = current + direction * step;
+
+                // Snap to exact target or bounds
+                if (target < 0) target = 0;
+                if (target > maxScrollLeft) target = maxScrollLeft;
+
+                container.scrollTo({ left: target, behavior: "smooth" });
+            };
+
+            if (prevBtn) {
+                addEventListenerWithCleanup(prevBtn, "click", () => scrollByPage(-1));
+            }
+            if (nextBtn) {
+                addEventListenerWithCleanup(nextBtn, "click", () => scrollByPage(1));
+            }
+
+            // Mouse Drag-to-Scroll (Desktop)
+            let isDown = false;
+            let startX = 0;
+            let scrollStart = 0;
+            let hasDragged = false;
+
+            const onMouseDown = (e) => {
+                // Ignore clicks on links or buttons inside the card
+                if (e.target.closest("a, button")) return;
+                isDown = true;
+                hasDragged = false;
+                container.classList.add("is-dragging");
+                startX = e.pageX - container.offsetLeft;
+                scrollStart = container.scrollLeft;
+            };
+
+            const onMouseMove = (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 1.5; // Smooth 1.5x multiplier
+                if (Math.abs(walk) > 5) hasDragged = true;
+                container.scrollLeft = scrollStart - walk;
+            };
+
+            const onMouseUpOrLeave = () => {
+                if (!isDown) return;
+                isDown = false;
+                container.classList.remove("is-dragging");
+                updateNavState();
+            };
+
+            // Prevent link clicks if user was dragging
+            const onCardClick = (e) => {
+                if (hasDragged) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    hasDragged = false;
+                }
+            };
+
+            addEventListenerWithCleanup(container, "mousedown", onMouseDown);
+            addEventListenerWithCleanup(window, "mousemove", onMouseMove);
+            addEventListenerWithCleanup(window, "mouseup", onMouseUpOrLeave);
+            addEventListenerWithCleanup(container, "click", onCardClick, true);
+
+            // Wheel / Trackpad scroll: convert vertical wheel to horizontal scroll inside carousel
+            const onWheel = (e) => {
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 10) {
+                    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                    const canScrollRight = e.deltaY > 0 && container.scrollLeft < maxScrollLeft - 2;
+                    const canScrollLeft = e.deltaY < 0 && container.scrollLeft > 2;
+
+                    if (canScrollRight || canScrollLeft) {
+                        e.preventDefault();
+                        container.scrollBy({ left: e.deltaY * 0.9, behavior: "auto" });
+                    }
+                }
+            };
+            addEventListenerWithCleanup(container, "wheel", onWheel, { passive: false });
+
+            const handleResize = () => {
+                buildPagination();
+                updateNavState();
+            };
+
+            const throttledScroll = throttle(updateNavState, 30);
+            addEventListenerWithCleanup(container, "scroll", throttledScroll, { passive: true });
+            addEventListenerWithCleanup(window, "resize", handleResize, { passive: true });
+            updateNavState();
+        }
+    }
+
     // --- 6. SCROLL ORBIT FOR HERO DOTS ---
     const dotsContainer = document.querySelector(".image-open-container");
     let orbitRafId = null;

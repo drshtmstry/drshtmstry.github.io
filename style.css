@@ -153,13 +153,14 @@ html {
   }
 
   .project-card-figma {
-    padding: 16px 20px !important;
+    min-height: 240px !important;
+    padding: 24px 24px !important;
   }
 
   .project-text {
-    margin-bottom: 8px !important;
-    font-size: 0.85rem !important;
-    line-height: 1.4 !important;
+    margin-bottom: 12px !important;
+    font-size: 0.86rem !important;
+    line-height: 1.5 !important;
   }
 }
 
@@ -382,30 +383,22 @@ html.nav-scrolling .reveal-stagger>* {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(var(--bg-primary), 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  border-bottom: 1px solid transparent;
   height: 64px;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 12px, 0);
+  pointer-events: none; /* Let outside clicks pass through around floating pill */
   transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-bottom-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: auto;
-}
-
-[data-theme="dark"] .navbar {
-  background: rgba(8, 12, 20, 0.85);
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-container {
   max-width: 1200px;
-  width: 100%;
+  width: calc(100% - 32px);
   height: 100%;
   margin: 0 auto;
   padding: 0 40px;
@@ -413,41 +406,33 @@ html.nav-scrolling .reveal-stagger>* {
   align-items: center;
   justify-content: space-between;
   border-radius: 999px;
-  background: transparent;
-  border: 1px solid transparent;
-  box-shadow: 0 0 0 transparent;
-  transition:
-    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    -webkit-backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Morph into floating bar ONLY when scrolling starts (exact same width, height, and content spacing) */
-.navbar.scrolled {
-  transform: translate3d(0, 12px, 0);
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-bottom-color: transparent;
-  pointer-events: none; /* Let outside clicks pass through */
-}
-
-.navbar.scrolled .nav-container {
-  padding: 0 40px; /* Kept strictly at 40px so links & logo spacing do not shift */
   background: rgba(var(--bg-card), 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-color: rgba(128, 128, 128, 0.14); /* Ultra-soft glass border, no harsh contrast */
-  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(128, 128, 128, 0.14);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
   pointer-events: auto;
+  transition:
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .nav-container {
+  background: rgba(15, 22, 36, 0.88);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.45);
+}
+
+/* Subtle elevation shadow when scrolling */
+.navbar.scrolled .nav-container {
+  box-shadow: 0 14px 40px -8px rgba(0, 0, 0, 0.12);
+  border-color: rgba(128, 128, 128, 0.2);
 }
 
 [data-theme="dark"] .navbar.scrolled .nav-container {
-  background: rgba(15, 22, 36, 0.88);
-  border-color: rgba(255, 255, 255, 0.08); /* Soft dark mode border */
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 18px 48px -10px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .logo {
@@ -1289,32 +1274,104 @@ html.nav-scrolling .reveal-stagger>* {
   padding: 80px 0;
 }
 
-.portfolio-top h2 {
-  margin-bottom: 20px;
+.portfolio-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.portfolio-header-row h2 {
+  margin-bottom: 0 !important;
+}
+
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.carousel-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.25);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
 }
 
 .projects-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scroll-snap-stop: always;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none; /* Firefox */
+  padding: 16px 4px 24px 4px;
+  cursor: grab;
+  user-select: none;
+}
+
+.projects-container.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto !important;
+  scroll-snap-type: none !important;
+}
+
+.projects-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 .project-card-figma {
   position: relative;
+  flex: 0 0 calc((100% - 40px) / 3); /* 3 cards per view on wide screens */
+  min-width: 290px;
+  min-height: 275px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
   transition:
-    transform var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base),
+    transform var(--transition-base),
     opacity var(--transition-slow);
-  will-change: transform, border-color, box-shadow, opacity;
   overflow: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -1330,26 +1387,63 @@ html.nav-scrolling .reveal-stagger>* {
 }
 
 .portfolio-section.active .project-card-figma:nth-child(1) {
-  transition-delay: 0.3s;
+  transition-delay: 0.25s;
 }
 
 .portfolio-section.active .project-card-figma:nth-child(2) {
-  transition-delay: 0.42s;
+  transition-delay: 0.35s;
 }
 
 .portfolio-section.active .project-card-figma:nth-child(3) {
-  transition-delay: 0.54s;
+  transition-delay: 0.45s;
 }
 
 .portfolio-section.active .project-card-figma:nth-child(4) {
-  transition-delay: 0.66s;
+  transition-delay: 0.55s;
+}
+
+.portfolio-section.active .project-card-figma:nth-child(5) {
+  transition-delay: 0.65s;
 }
 
 .project-card-figma:hover {
-  transform: translate3d(0, -8px, 0);
+  transform: translate3d(0, -6px, 0);
   border-color: var(--primary);
   box-shadow: var(--shadow-md);
   transition-delay: 0s !important;
+}
+
+.carousel-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.35;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.carousel-dot:hover {
+  opacity: 0.75;
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: var(--primary);
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.4);
 }
 
 .project-card-header {
@@ -1375,10 +1469,11 @@ html.nav-scrolling .reveal-stagger>* {
 }
 
 .project-text {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 12px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
 }
 
 .project-footer {
@@ -1389,6 +1484,7 @@ html.nav-scrolling .reveal-stagger>* {
 
 .project-tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -2112,6 +2208,10 @@ html.nav-scrolling .reveal-stagger>* {
     grid-template-columns: 1fr;
     gap: 48px;
   }
+
+  .project-card-figma {
+    flex: 0 0 calc((100% - 20px) / 2); /* 2 cards per view on tablet */
+  }
 }
 
 @media (max-width: 768px) {
@@ -2240,7 +2340,20 @@ html.nav-scrolling .reveal-stagger>* {
   }
 
   .projects-container {
-    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 8px 0 16px 0;
+  }
+
+  .project-card-figma {
+    flex: 0 0 85%;
+    min-width: 260px;
+    padding: 20px;
+  }
+
+  .carousel-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
   }
 
   .contact-grid-wrapper {
